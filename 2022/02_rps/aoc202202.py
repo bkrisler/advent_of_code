@@ -55,6 +55,32 @@ def score_round(move):
     return result
 
 
+def select_required_play(move):
+    """
+    Given a move: (A, Y) need to play a draw so X.
+    A/X = Rock, B/Y = Paper, C/Z = Sissors
+    X = Loose, Y = Draw, Z = Win
+    """
+    strategy_table = {
+        ('A', 'X'): 'Z',
+        ('A', 'Y'): 'X',
+        ('A', 'Z'): 'Y',
+        ('B', 'X'): 'X',
+        ('B', 'Y'): 'Y',
+        ('B', 'Z'): 'Z',
+        ('C', 'X'): 'Y',
+        ('C', 'Y'): 'Z',
+        ('C', 'Z'): 'X'
+    }
+
+    return strategy_table[move]
+
+
+def select_and_play(move):
+    selected_move = select_required_play(move)
+    return score_round((move[0], selected_move))
+
+
 def part1(data):
     """Solve part 1."""
     return sum([score_round(move) for move in data])
@@ -62,6 +88,7 @@ def part1(data):
 
 def part2(data):
     """Solve part 2."""
+    return sum([select_and_play(move) for move in data])
 
 
 def solve(puzzle_input):

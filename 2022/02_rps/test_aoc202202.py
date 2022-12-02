@@ -28,6 +28,18 @@ def test_parse_example1(example1):
 
 
 @pytest.mark.parametrize("move,expected",
+                         [(('A', 'Y'), 4), (('B', 'X'), 1), (('C', 'Z'), 7)])
+def test_select_and_play(move, expected):
+    assert aoc202202.select_and_play(move) == expected
+
+
+@pytest.mark.parametrize("move,expected",
+                         [(('A', 'Y'), 'X'), (('B', 'X'), 'X'), (('C', 'Z'), 'X')])
+def test_select_required_play(move, expected):
+    assert aoc202202.select_required_play(move) == expected
+
+
+@pytest.mark.parametrize("move,expected",
                          [(('A', 'Y'), 8), (('B', 'X'), 1), (('C', 'Z'), 6)])
 def test_score_round(move, expected):
     assert aoc202202.score_round(move) == expected
