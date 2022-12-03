@@ -3,24 +3,16 @@
 # Standard library imports
 import pathlib
 import sys
+from itertools import groupby
+
+
+def convert(lst):
+    return [int(i) for i in lst]
 
 
 def parse_data(puzzle_input):
-    """Parse input."""
     cals = puzzle_input.splitlines()
-    elves = []
-    elf = []
-    for cal in cals:
-        if cal == '':
-            elves.append(elf)
-            elf = []
-        else:
-            elf.append(int(cal))
-
-    if len(elf) > 0:
-        elves.append(elf)
-
-    return elves
+    return [list(convert(sub)) for ele, sub in groupby(cals, key=bool) if ele]
 
 
 def part1(data):
