@@ -10,23 +10,14 @@ import numpy as np
 def parse_data(puzzle_input):
     """Parse input."""
     pattern = re.compile('(\d*)-(\d*),(\d*)-(\d*)')
-    sections = re.findall(pattern, puzzle_input)
-    groups = []
-    for section in sections:
-        group1 = list(range(int(section[0]), int(section[1])+1))
-        group2 = list(range(int(section[2]), int(section[3])+1))
-        groups.append((group1, group2))
-    return groups
+    return [(np.arange(int(s[0]), int(s[1])+1), np.arange(int(s[2]), int(s[3])+1)) for s in re.findall(pattern, puzzle_input)]
 
 
 def part1(data):
     """Solve part 1."""
     counter = 0
-    for group in data:
-        a = np.array(group[0])
-        b = np.array(group[1])
-        if np.all(np.isin(a, b) == True) or np.all(np.isin(b, a) == True):
-            counter += 1
+    for d in data:
+        counter += 1 if np.all(np.isin(d[0], d[1]) == True) or np.all(np.isin(d[1], d[0]) == True) else 0
 
     return counter
 
@@ -34,11 +25,8 @@ def part1(data):
 def part2(data):
     """Solve part 2."""
     counter = 0
-    for group in data:
-        a = np.array(group[0])
-        b = np.array(group[1])
-        if np.any(np.isin(a, b) == True) or np.any(np.isin(b, a) == True):
-            counter += 1
+    for d in data:
+        counter += 1 if np.any(np.isin(d[0], d[1]) == True) or np.any(np.isin(d[1], d[0]) == True) else 0
 
     return counter
 
