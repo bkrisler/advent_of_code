@@ -35,10 +35,9 @@ def test_part1_example1(example1):
     assert aoc202205.part1(example1) == 'CMZ'
 
 
-@pytest.mark.skip(reason="Not implemented")
 def test_part2_example1(example1):
     """Test part 2 on example input."""
-    assert aoc202205.part2(example1) == ...
+    assert aoc202205.part2(example1) == 'MCD'
 
 
 @pytest.mark.skip(reason="Not implemented")

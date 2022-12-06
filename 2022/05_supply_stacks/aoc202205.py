@@ -1,12 +1,12 @@
 """AoC 5, 2022: supply_stacks."""
 
 # Standard library imports
+import copy
 import pathlib
 import sys
 from collections import defaultdict
 
 import parse
-import numpy
 
 
 def parse_data(puzzle_input):
@@ -26,7 +26,7 @@ def parse_data(puzzle_input):
 
 
 def part1(data):
-    stacks = data[0]
+    stacks = copy.deepcopy(data[0])
 
     for move in data[1]:
         for i in range(move[0]):
@@ -43,6 +43,24 @@ def part1(data):
 
 def part2(data):
     """Solve part 2."""
+    stacks = data[0]
+
+    for move in data[1]:
+        move_from = stacks[move[1]]
+        move_to = stacks[move[2]]
+
+        tmp = []
+        start = len(move_from)
+        end = start - move[0]
+        for i in range(start, end, -1):
+            tmp.insert(0, move_from.pop())
+        move_to.extend(tmp)
+
+    answer = ''
+    for x in range(len(stacks.keys())):
+        answer += stacks[x+1][-1]
+
+    return answer
 
 
 def solve(puzzle_input):
