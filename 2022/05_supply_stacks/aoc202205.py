@@ -3,45 +3,40 @@
 # Standard library imports
 import pathlib
 import sys
+from collections import defaultdict
+
 import parse
 import numpy
 
 
 def parse_data(puzzle_input):
-    """Parse input."""
-    rows = []
+    stacks = defaultdict(list)
     moves = []
     for line in puzzle_input.splitlines():
-        if line.strip().startswith('1'):
-            continue
-        if line.startswith('move'):
+        if '[' in line:
+            for i, v in enumerate(line):
+                if v == '[':
+                    stack_numb = int((i / 4) + 1)
+                    stacks[stack_numb].insert(0, line[i+1])
+        elif line.startswith('move'):
             res = parse.parse('move {:d} from {:d} to {:d}', line)
             moves.append([res[0], res[1], res[2]])
-        else:
-            if len(line) > 0:
-                rows.append([line[1:2], line[5:6], line[9:10]])
-    result = (rows, moves)
-    return result
+
+    return stacks, moves
 
 
 def part1(data):
-    """Solve part 1."""
-    rotated_stacks = numpy.rot90(numpy.array(data[0]), 3)
-
-    ltt = {}
-    for idx in range(numpy.shape(rotated_stacks)[0]):
-        ltt[idx+1] = [i for i in list(rotated_stacks[idx]) if i != ' ']
+    stacks = data[0]
 
     for move in data[1]:
         for i in range(move[0]):
-            move_from = ltt[move[1]]
-            move_to = ltt[move[2]]
-            item = move_from.pop()
-            move_to.append(item)
+            move_from = stacks[move[1]]
+            move_to = stacks[move[2]]
+            move_to.append(move_from.pop())
 
     answer = ''
-    for key in ltt:
-        answer += ltt[key][-1]
+    for x in range(len(stacks.keys())):
+        answer += stacks[x+1][-1]
 
     return answer
 

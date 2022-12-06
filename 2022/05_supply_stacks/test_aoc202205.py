@@ -25,7 +25,7 @@ def example2():
 def test_parse_example1(example1):
     """Test that input is parsed properly."""
     assert len(example1) == 2
-    assert example1[0] == [[' ', 'D', ' '], ['N', 'C', ' '], ['Z', 'M', 'P']]
+    assert example1[0][1] == ['Z', 'N']
     assert example1[1] == [[1, 2, 1], [3, 1, 3], [2, 2, 1], [1, 1, 2]]
 
 
