@@ -28,18 +28,22 @@ def part1(data):
     """Solve part 1."""
     rotated_stacks = numpy.rot90(numpy.array(data[0]), 3)
 
-    lt = {1: [i for i in list(rotated_stacks[0]) if i != ' '],
-          2: [i for i in list(rotated_stacks[1]) if i != ' '],
-          3: [i for i in list(rotated_stacks[2]) if i != ' ']}
+    ltt = {}
+    for idx in range(numpy.shape(rotated_stacks)[0]):
+        ltt[idx+1] = [i for i in list(rotated_stacks[idx]) if i != ' ']
 
     for move in data[1]:
         for i in range(move[0]):
-            move_from = lt[move[1]]
-            move_to = lt[move[2]]
+            move_from = ltt[move[1]]
+            move_to = ltt[move[2]]
             item = move_from.pop()
             move_to.append(item)
 
-    return lt[1][-1] + lt[2][-1] + lt[3][-1]
+    answer = ''
+    for key in ltt:
+        answer += ltt[key][-1]
+
+    return answer
 
 
 def part2(data):
