@@ -11,15 +11,6 @@ def parse_data(puzzle_input):
     pattern = re.compile('(.) (.)')
     return re.findall(pattern, puzzle_input)
 
-
-# def parse_win_table(win_table):
-#     pattern = re.compile('(.) (.) (.)\\n')
-#     for x in pattern.finditer(win_table):
-#         print(x)
-#     res = [m.groupdict() for m in pattern.finditer(win_table)]
-#     return res
-
-
 def map_move(move):
     """
     Standardize the move
