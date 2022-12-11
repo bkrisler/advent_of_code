@@ -1,0 +1,13 @@
+$ cd /
+$ ls
+233998 glh.fcb
+184686 jzn
+dir a
+dir b
+299692 rbssdzm.ccn
+dir c
+$ cd a
+$ ls
+32148 lhsrj.fnr
+dir aa
+dir ab
