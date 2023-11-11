@@ -11,6 +11,7 @@ def parse_data(puzzle_input):
     pattern = re.compile('(.) (.)')
     return re.findall(pattern, puzzle_input)
 
+
 def map_move(move):
     """
     Standardize the move
