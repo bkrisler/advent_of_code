@@ -35,6 +35,14 @@ def part1(data, goal):
         
 def part2(data):
     """Solve part 2."""
+    power_sum = 0
+    for color, count in data.items():
+        min_red = max(count['red'])
+        min_blue = max(count['blue'])
+        min_green = max(count['green'])
+        power = min_blue * min_green * min_red
+        power_sum = power_sum + power
+    return power_sum
 
 
 def solve(puzzle_input, goal):
