@@ -5,16 +5,6 @@ import pathlib
 import re
 import sys
 
-import parse
-
-
-def process(row):
-    parts = list(map(int, row.split(' ')))
-    dest_range = [x for x in range(parts[0], parts[0] + parts[2])]
-    src_range = [x for x in range(parts[1], parts[1] + parts[2])]
-    row_map = zip(src_range, dest_range)
-    return row_map
-
 
 def parse_data(puzzle_input):
     """Parse input."""
@@ -35,7 +25,7 @@ def parse_data(puzzle_input):
 
             map_data = []
             for row in m.splitlines():
-                map_data.extend(list(process(row)))
+                map_data.append(list(map(int, row.split(' '))))
             results[title] = sorted(map_data)
             #print("{}:: {}".format(title, sorted(map_data)))
 
@@ -43,13 +33,18 @@ def parse_data(puzzle_input):
 
 
 def get_match(seed, pair_map):
-    seeds = [s[0] for s in pair_map]
-    if seed not in seeds:
+    l = [x for x in sorted(pair_map, key = lambda x: x[1]) if x[1] <= seed]
+    if not l:
         return seed
 
-    x = [y for y in pair_map if y[0] == seed]
-    return x[0][1]
+    closest = l[-1]
+    r_min = closest[1]
+    r_max = closest[1] + closest[2]
+    if r_min <= seed <= r_max:
+        index = seed - r_min
+        return closest[0] + index
 
+    return seed
 
 
 def part1(data):
