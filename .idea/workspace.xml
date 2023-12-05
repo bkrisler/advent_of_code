@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="59f98ace-f199-4728-9ae5-c72622f91a4f" name="Changes" comment="2023 Day two, part 2 finished!">
-      <change afterPath="$PROJECT_DIR$/2023/03_gear_ratios/aoc202303.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2023/03_gear_ratios/example1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2023/03_gear_ratios/example2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2023/03_gear_ratios/input.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2023/03_gear_ratios/test_aoc202303.py" afterDir="false" />
+    <list default="true" id="59f98ace-f199-4728-9ae5-c72622f91a4f" name="Changes" comment="Day 3, struggling with the data parsing!&#10;&#10;Attempted to use numpy and feel like I got distracted. But want to save that work here.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2023/03_gear_ratios/aoc202303.py" beforeDir="false" afterPath="$PROJECT_DIR$/2023/03_gear_ratios/aoc202303.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,7 +169,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701572122138</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Day 3, struggling with the data parsing!&#10;&#10;Attempted to use numpy and feel like I got distracted. But want to save that work here.">
+      <option name="closed" value="true" />
+      <created>1701738055812</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1701738055812</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -192,7 +196,8 @@
     <MESSAGE value="2023 Day one finished!" />
     <MESSAGE value="2023 Day two, part 1 finished!" />
     <MESSAGE value="2023 Day two, part 2 finished!" />
-    <option name="LAST_COMMIT_MESSAGE" value="2023 Day two, part 2 finished!" />
+    <MESSAGE value="Day 3, struggling with the data parsing!&#10;&#10;Attempted to use numpy and feel like I got distracted. But want to save that work here." />
+    <option name="LAST_COMMIT_MESSAGE" value="Day 3, struggling with the data parsing!&#10;&#10;Attempted to use numpy and feel like I got distracted. But want to save that work here." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -211,6 +216,11 @@
           <url>file://$PROJECT_DIR$/2023/02_cube_conundrum/aoc202302.py</url>
           <line>50</line>
           <option name="timeStamp" value="48" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/2023/03_gear_ratios/aoc202303.py</url>
+          <line>61</line>
+          <option name="timeStamp" value="74" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
