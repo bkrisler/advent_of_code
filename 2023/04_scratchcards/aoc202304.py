@@ -2,15 +2,41 @@
 
 # Standard library imports
 import pathlib
+import re
 import sys
+from collections import defaultdict
 
 
 def parse_data(puzzle_input):
     """Parse input."""
+    pattern = r'Card\s*(\d+):\s*(\d+\s*.*)\s\|\s*(\d+\s*.*)'
+    cards = defaultdict(list)
+    for row in puzzle_input.split('\n'):
+        matches = re.finditer(pattern, row)
+        for match in matches:
+            winning = [x for x in match.group(2).split()]
+            played = [x for x in match.group(3).split()]
+            cards[match.group(1)].append(winning)
+            cards[match.group(1)].append(played)
+
+    return cards
 
 
 def part1(data):
-    """Solve part 1."""
+    print()
+    total_points = 0
+    for card, val in data.items():
+        points = 0
+        matches = list(set(val[0]) & set(val[1]))
+        for idx, m in enumerate(matches):
+            if idx == 0:
+                points = 1
+            else:
+                points = points * 2
+
+        total_points = total_points + points
+
+    return total_points
 
 
 def part2(data):

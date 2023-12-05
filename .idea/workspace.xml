@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="59f98ace-f199-4728-9ae5-c72622f91a4f" name="Changes" comment="Day 3, finally settled on a parsing solution. Had a few other stupid bugs but finally got it working!">
+    <list default="true" id="59f98ace-f199-4728-9ae5-c72622f91a4f" name="Changes" comment="Day 4 setup">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2023/03_gear_ratios/aoc202303.py" beforeDir="false" afterPath="$PROJECT_DIR$/2023/03_gear_ratios/aoc202303.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2023/04_scratchcards/aoc202304.py" beforeDir="false" afterPath="$PROJECT_DIR$/2023/04_scratchcards/aoc202304.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2023/04_scratchcards/example1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/2023/04_scratchcards/example1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2023/04_scratchcards/test_aoc202304.py" beforeDir="false" afterPath="$PROJECT_DIR$/2023/04_scratchcards/test_aoc202304.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +36,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Python.aoc202303">
+  <component name="RunManager" selected="Python.aoc202304">
     <configuration name="aoc202302" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="advent_of_code" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -77,32 +79,25 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_aoc202302.test_parse_example1" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="aoc202304" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="advent_of_code" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2023/02_cube_conundrum" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2023/04_scratchcards" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_aoc202302.test_parse_example1&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Python tests for test_aoc202302.test_part1_example1" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="advent_of_code" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2023/02_cube_conundrum" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_aoc202302.test_part1_example1&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2023/04_scratchcards/aoc202304.py" />
+      <option name="PARAMETERS" value="input.txt" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
     <configuration name="Python tests for test_aoc202303.test_parse_example1" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
@@ -119,20 +114,49 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
+    <configuration name="Python tests for test_aoc202304.test_parse_example1" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="advent_of_code" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2023/04_scratchcards" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_aoc202304.test_parse_example1&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_aoc202304.test_part1_example1" type="tests" factoryName="Autodetect" nameIsGenerated="true">
+      <module name="advent_of_code" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2023/04_scratchcards" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_aoc202304.test_part1_example1&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
     <list>
+      <item itemvalue="Python.aoc202304" />
       <item itemvalue="Python.aoc202303" />
       <item itemvalue="Python.aoc202302" />
+      <item itemvalue="Python tests.Python tests for test_aoc202304.test_part1_example1" />
+      <item itemvalue="Python tests.Python tests for test_aoc202304.test_parse_example1" />
       <item itemvalue="Python tests.Python tests for test_aoc202303.test_parse_example1" />
-      <item itemvalue="Python tests.Python tests for test_aoc202302.test_parse_example1" />
-      <item itemvalue="Python tests.Python tests for test_aoc202302.test_part1_example1" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.aoc202304" />
+        <item itemvalue="Python tests.Python tests for test_aoc202304.test_parse_example1" />
         <item itemvalue="Python.aoc202303" />
         <item itemvalue="Python tests.Python tests for test_aoc202303.test_parse_example1" />
         <item itemvalue="Python.aoc202302" />
-        <item itemvalue="Python tests.Python tests for test_aoc202302.test_part1_example1" />
-        <item itemvalue="Python tests.Python tests for test_aoc202302.test_parse_example1" />
       </list>
     </recent_temporary>
   </component>
@@ -185,7 +209,23 @@
       <option name="project" value="LOCAL" />
       <updated>1701742681960</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Finished Day 3.">
+      <option name="closed" value="true" />
+      <created>1701746201901</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1701746201901</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Day 4 setup">
+      <option name="closed" value="true" />
+      <created>1701746534014</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1701746534014</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -206,7 +246,9 @@
     <MESSAGE value="2023 Day two, part 2 finished!" />
     <MESSAGE value="Day 3, struggling with the data parsing!&#10;&#10;Attempted to use numpy and feel like I got distracted. But want to save that work here." />
     <MESSAGE value="Day 3, finally settled on a parsing solution. Had a few other stupid bugs but finally got it working!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Day 3, finally settled on a parsing solution. Had a few other stupid bugs but finally got it working!" />
+    <MESSAGE value="Finished Day 3." />
+    <MESSAGE value="Day 4 setup" />
+    <option name="LAST_COMMIT_MESSAGE" value="Day 4 setup" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -225,6 +267,11 @@
           <url>file://$PROJECT_DIR$/2023/02_cube_conundrum/aoc202302.py</url>
           <line>50</line>
           <option name="timeStamp" value="48" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/2023/04_scratchcards/test_aoc202304.py</url>
+          <line>26</line>
+          <option name="timeStamp" value="94" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
