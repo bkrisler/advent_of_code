@@ -41,6 +41,28 @@ def part1(data):
 
 def part2(data):
     """Solve part 2."""
+    print()
+    total_cards = 0
+    card_count = defaultdict(int)
+    for card, val in data.items():
+        int_card = int(card)
+        matches = list(set(val[0]) & set(val[1]))
+        #print("Card {} has {} matching numbers".format(card, len(matches)))
+
+        # Play my card
+        for c in range(int_card + 1, int_card + len(matches) + 1):
+            card_count[c] += 1
+
+        # Play my copies
+        for cc in range(card_count[int_card]):
+            for c in range(int_card + 1, int_card + len(matches) + 1):
+                card_count[c] += 1
+
+    # Add all my original cards
+    for card in data.keys():
+        card_count[int(card)] += 1
+
+    return sum(card_count.values())
 
 
 def solve(puzzle_input):
