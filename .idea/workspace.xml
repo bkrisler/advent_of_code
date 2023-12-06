@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="59f98ace-f199-4728-9ae5-c72622f91a4f" name="Changes" comment="Day 5 part one. This &quot;might&quot; work but super slow. Time to optimize.">
+    <list default="true" id="59f98ace-f199-4728-9ae5-c72622f91a4f" name="Changes" comment="Day 5 part one. Finished.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/2023/05_seed_fertilizer/aoc202305.py" beforeDir="false" afterPath="$PROJECT_DIR$/2023/05_seed_fertilizer/aoc202305.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2023/05_seed_fertilizer/test_aoc202305.py" beforeDir="false" afterPath="$PROJECT_DIR$/2023/05_seed_fertilizer/test_aoc202305.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +35,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="Python.aoc202305">
+  <component name="RunManager" selected="Python tests.Python tests for test_aoc202305.test_part1_example1">
     <configuration name="aoc202304" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="advent_of_code" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -69,7 +70,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2023/05_seed_fertilizer/aoc202305.py" />
-      <option name="PARAMETERS" value="input.txt" />
+      <option name="PARAMETERS" value="example1.txt" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -143,8 +144,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.aoc202305" />
         <item itemvalue="Python tests.Python tests for test_aoc202305.test_part1_example1" />
+        <item itemvalue="Python.aoc202305" />
         <item itemvalue="Python tests.Python tests for test_aoc202305.test_parse_example1" />
         <item itemvalue="Python.aoc202304" />
         <item itemvalue="Python tests.Python tests for test_aoc202304.test_part2_example1" />
@@ -248,7 +249,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701806624235</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Day 5 part one. Finished.">
+      <option name="closed" value="true" />
+      <created>1701810168362</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1701810168362</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -275,7 +284,8 @@
     <MESSAGE value="Day 4 completed." />
     <MESSAGE value="Day 5 startup" />
     <MESSAGE value="Day 5 part one. This &quot;might&quot; work but super slow. Time to optimize." />
-    <option name="LAST_COMMIT_MESSAGE" value="Day 5 part one. This &quot;might&quot; work but super slow. Time to optimize." />
+    <MESSAGE value="Day 5 part one. Finished." />
+    <option name="LAST_COMMIT_MESSAGE" value="Day 5 part one. Finished." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
