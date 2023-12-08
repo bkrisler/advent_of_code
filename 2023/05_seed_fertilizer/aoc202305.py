@@ -1,5 +1,4 @@
 """AoC 5, 2023: Seed Fertilizer."""
-import concurrent.futures
 
 # Standard library imports
 import pathlib
@@ -16,7 +15,7 @@ def parse_data(puzzle_input):
         title = match.group(1).strip()
         if title == 'seeds':
             seeds = match.group(2).strip().split(' ')
-            #print("process seeds: {}".format(seeds))
+            # print("process seeds: {}".format(seeds))
             seeds = list(map(int, seeds))
             results[title] = seeds
         else:
@@ -28,13 +27,14 @@ def parse_data(puzzle_input):
             for row in m.splitlines():
                 map_data.append(list(map(int, row.split(' '))))
             results[title] = sorted(map_data)
-            #print("{}:: {}".format(title, sorted(map_data)))
+
+            # print("{}:: {}".format(title, sorted(map_data)))
 
     return results
 
 
 def get_match(seed, pair_map):
-    l = [x for x in sorted(pair_map, key = lambda x: x[1]) if x[1] <= seed]
+    l = [x for x in sorted(pair_map, key=lambda x: x[1]) if x[1] <= seed]
     if not l:
         return seed
 
@@ -76,7 +76,7 @@ def part1(data):
         # Get Location Number
         location = get_match(humidity, data['humidity-to-location'])
 
-        #print("Seed: {}, Soil: {}, Fertilizer: {}, Water: {}, Light: {}, Temp: {}, Humidity: {} Location: {}".format(seed, soil, fertilizer, water, light, temp, humidity, location))
+        # print("Seed: {}, Soil: {}, Fertilizer: {}, Water: {}, Light: {}, Temp: {}, Humidity: {} Location: {}".format(seed, soil, fertilizer, water, light, temp, humidity, location))
         locations.append(location)
 
     return min(locations)
@@ -105,44 +105,126 @@ def get_location(seed, data):
     # Get Location Number
     location = get_match(humidity, data['humidity-to-location'])
 
-    #print("Seed: {}, Soil: {}, Fertilizer: {}, Water: {}, Light: {}, Temp: {}, Humidity: {} Location: {}".format(seed, soil, fertilizer, water, light, temp, humidity, location))
+    print("Seed: {}, Soil: {}, Fertilizer: {}, Water: {}, Light: {}, Temp: {}, Humidity: {} Location: {}".format(seed,
+                                                                                                                 location))
     return location
 
 
-def process_entry(entry, data):
-    min_location = sys.maxsize
+def range_end(r):
+    return r[0] + (r[1] - 1)
 
-    for seed in range(entry[0], entry[0] + entry[1]):
-        location = get_location(seed, data)
-        if location < min_location:
-            min_location = location
-            #print("Min = {}".format(min_location))
-    return min_location
+
+def contains(container, target):
+    return target[0] >= container[1] and range_end(target) <= range_end((container[1], container[2]))
+
+
+def outside(container, target):
+    # print("{} > {} or {} < {}".format(
+    #     target[0], container[1]+(container[2]-1), target[0] + target[1], container[1]))
+    if target[0] > container[1] + (container[2] - 1) or target[0] + target[1] < container[1]:
+        return True
+
+
+def overlap(container, target):
+    if target[0] < container[1] <= range_end(target):
+        return True
+
+    if container[1] < target[0] < range_end((container[1], container[2])):
+        return True
+
+    return False
+
+
+def get_destination(target, data):
+    start_index = data[0] + (target[0] - data[1])
+    return start_index, target[1]
+
+
+def get_overlap_dest(target, data):
+    if target[0] - data[1] < 0:
+        a_start = target[0]
+        a_end = data[1] - 1
+        b_start = data[0]
+        b_end = target[1] - (a_end - (a_start-1))
+
+        r1 = a_start, a_end-(a_start-1)
+        r2 = b_start, b_end,
+
+    else:
+        dest_start = data[0] + (target[0] - data[1])
+        src_end = data[1] + (data[2] - 1)
+        dest_end = data[0] + (data[2] - 1)
+
+        r1 = dest_start, (dest_end + 1 - dest_start)
+        r2 = src_end + 1, (target[1] - r1[1])
+
+    return [r1, r2]
+
+
+def map_range(tgt, data):
+    match = [row for row in sorted(data) if contains(row, tgt)]
+    if match:
+        return [get_destination(tgt, match[0])]
+
+    overlap_match = [row for row in sorted(data, key=lambda x: x[1]) if overlap(row, tgt)]
+    if overlap_match:
+        overlaps = []
+        for o in overlap_match:
+            overlaps.append(get_overlap_dest(tgt, o))
+        lll = [item for sub_list in overlaps for item in sub_list]
+        return lll
+
+    outside_match = [row for row in sorted(data) if outside(row, tgt)]
+    if len(outside_match) == len(data):
+        return [tgt]
+
+    raise Exception("Why?")
 
 
 def part2(data):
     """Solve part 2."""
     print("\nStart Part 2")
 
-    min_location = sys.maxsize
-    pairs = zip(data['seeds'][::2], data['seeds'][1::2])
+    seeds = list(zip(data['seeds'][::2], data['seeds'][1::2]))
 
-    for entry in pairs:
-        m = process_entry(entry, data)
-        if m < min_location:
-            min_location = m
+    result = []
+    for row in seeds:
+        for x in map_range(row, data['seed-to-soil']):
+            result.append(x)
 
-    # executor = concurrent.futures.ProcessPoolExecutor(10)
-    # futures = [executor.submit(process_entry, entry, data) for entry in pairs]
-    # concurrent.futures.wait(futures, return_when=concurrent.futures.ALL_COMPLETED)
+    result2 = []
+    for row in result:
+        for x in map_range(row, data['soil-to-fertilizer']):
+            result2.append(x)
 
-    # merged_list = [v for f in futures for v in f.result()]
-    # print(merged_list)
-    # min_location = min(merged_list)
+    result3 = []
+    for row in result2:
+        for x in map_range(row, data['fertilizer-to-water']):
+            result3.append(x)
 
-#        print("Processing: {} with {} seeds".format(entry, entry[1]))
+    result4 = []
+    for row in result3:
+        for x in map_range(row, data['water-to-light']):
+            result4.append(x)
 
-    return min_location
+    result5 = []
+    for row in result4:
+        for x in map_range(row, data['light-to-temperature']):
+            result5.append(x)
+
+    result6 = []
+    for row in result5:
+        for x in map_range(row, data['temperature-to-humidity']):
+            result6.append(x)
+
+    result7 = []
+    for row in result6:
+        for x in map_range(row, data['humidity-to-location']):
+            result7.append(x)
+
+    lowest = sorted(result7)[0][0]
+    #print("Lowest Location: {}".format(lowest))
+    return lowest
 
 
 def solve(puzzle_input):
