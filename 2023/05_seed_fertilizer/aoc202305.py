@@ -6,6 +6,124 @@ import re
 import sys
 
 
+class Range:
+    def __init__(self, start=0, extent=0):
+        self._start = start
+        self._extent = extent
+
+    @staticmethod
+    def create(pnt):
+        return Range(pnt[0], pnt[1])
+
+    def start(self):
+        return self._start
+
+    def end(self):
+        if self._extent == 0:
+            # This makes no sense, but try to cover it?
+            return self._start
+
+        return self._start + (self._extent - 1)
+
+    def extent(self):
+        return self._extent
+
+    def contains(self, r):
+        return r.start() >= self._start and r.end() <= self.end()
+
+    def __eq__(self, other):
+        return self._start == other.start() and self._extent == other.extent()
+
+    def __str__(self):
+        return "Range: {}, {}".format(self._start, self._extent)
+
+    def __repr__(self):
+        return "{}, {}".format(self._start, self._extent)
+
+    @staticmethod
+    def from_row(data):
+        src = Range(data[1], data[2])
+        dest = Range(data[0], data[2])
+        return src, dest
+
+
+class Row:
+    def __init__(self, row):
+        self._row = row
+        self.src = Range(self._row[1], self._row[2])
+        self.dest = Range(self._row[0], self._row[2])
+
+    def get_src(self):
+        return self.src
+
+    def get_dest(self):
+        return self.dest
+
+    def src_contains(self, r):
+        return self.src.contains(r)
+
+    def dest_range(self, tgt):
+        if tgt.start() == self.src.start():
+            start = self.dest.start()
+        else:
+            start = self.src.start() + ((tgt.start() - 1) - self.src.end())
+
+        return Range(start, tgt.extent())
+
+    def overlapped(self, tgt):
+        if tgt.start() <= self.src.start() <= tgt.end():
+            if tgt.start() == self.src.start():
+                start1 = self.dest.start()
+                extent1 = self.dest.extent()
+            else:
+                start1 = self.src.start() - (self.src.start() - tgt.start())
+                extent1 = self.src.start() - start1
+
+            r1 = Range(start1, extent1)
+            r2 = Range(self.src.start(), tgt.extent() - r1.extent())
+            return [r1, r2]
+
+        if self.src.start() <= tgt.start() <= self.src.end() <= tgt.end():
+            start = self.src.start() + ((tgt.start() - 1) - self.src.end())
+            r1 = Range(start, (self.dest.end() + 1) - start)
+            r2 = Range(self.src.end()+1, tgt.extent() - r1.extent())
+            return [r1, r2]
+
+    def overlaps(self, tgt):
+        if tgt.start() <= self.src.start() <= tgt.end():
+            return True
+
+        if self.src.start() <= tgt.start() <= self.src.end() <= tgt.end():
+            return True
+
+        return False
+
+    def outside(self, tgt):
+        if tgt.end() < self.src.start():
+            return True
+
+        if tgt.start() > self.src.end():
+            return True
+
+        return False
+
+    def dest_for_src(self, tgt):
+        # Fully contained
+        if self.src_contains(tgt):
+            return [self.dest_range(tgt)]
+
+        # Overlap
+        if self.overlaps(tgt):
+            return self.overlapped(tgt)
+
+        # Fully outside
+        if self.outside(tgt):
+            return [tgt]
+
+    def __repr__(self):
+        return "Row: Src: {}, Dest: {}".format(self.src, self.dest)
+
+
 def parse_data(puzzle_input):
     """Parse input."""
 
@@ -114,8 +232,16 @@ def range_end(r):
     return r[0] + (r[1] - 1)
 
 
+def src_range(container):
+    return container[1], container[2]
+
+
+def dest_range(container):
+    return container[0], container[2]
+
+
 def contains(container, target):
-    return target[0] >= container[1] and range_end(target) <= range_end((container[1], container[2]))
+    return target[0] >= src[0] and range_end(target) <= range_end((container[1], container[2]))
 
 
 def outside(container, target):
@@ -145,9 +271,9 @@ def get_overlap_dest(target, data):
         a_start = target[0]
         a_end = data[1] - 1
         b_start = data[0]
-        b_end = target[1] - (a_end - (a_start-1))
+        b_end = target[1] - (a_end - (a_start - 1))
 
-        r1 = a_start, a_end-(a_start-1)
+        r1 = a_start, a_end - (a_start - 1)
         r2 = b_start, b_end,
 
     else:
@@ -162,9 +288,15 @@ def get_overlap_dest(target, data):
 
 
 def map_range(tgt, data):
-    match = [row for row in sorted(data) if contains(row, tgt)]
-    if match:
-        return [get_destination(tgt, match[0])]
+    tr = Range.create(tgt)
+    row = Row(data)
+
+    if row.src_contains(tr):
+        return [row.dest_range(tr)]
+
+    # match = [row for row in sorted(data) if contains(row, tgt)]
+    # if match:
+    #     return [get_destination(tgt, match[0])]
 
     overlap_match = [row for row in sorted(data, key=lambda x: x[1]) if overlap(row, tgt)]
     if overlap_match:
@@ -223,7 +355,7 @@ def part2(data):
             result7.append(x)
 
     lowest = sorted(result7)[0][0]
-    #print("Lowest Location: {}".format(lowest))
+    # print("Lowest Location: {}".format(lowest))
     return lowest
 
 
