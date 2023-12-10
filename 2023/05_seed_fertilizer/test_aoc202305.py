@@ -168,18 +168,28 @@ def test_dest_for_src():
     row = Row([5, 10, 5])
 
     # Test Contained
-    assert row.dest_for_src(Range(10, 2)) == [Range(5, 2)]
-    assert row.dest_for_src(Range(13, 2)) == [Range(8, 2)]
-    assert row.dest_for_src(Range(10, 5)) == [Range(5, 5)]
+    assert row.dest_for_src(Range(10, 2)) == [(5, 2)]
+    assert row.dest_for_src(Range(13, 2)) == [(8 ,2)]
+    assert row.dest_for_src(Range(10, 5)) == [(5 ,5)]
 
     # Test Overlap
-    assert row.dest_for_src(Range(8, 3)) == [Range(8, 2), Range(10, 1)]
+    assert row.dest_for_src(Range(8, 3)) == [(8 ,2), (10, 1)]
     row2 = Row([100, 0, 20])
-    assert row2.dest_for_src(Range(0, 5)) == [Range(100, 5)]
+    assert row2.dest_for_src(Range(0, 5)) == [(100, 5)]
 
     # Test Outside
-    assert row.dest_for_src(Range(8, 2)) == [Range(8, 2)]
-    assert row.dest_for_src(Range(800, 200)) == [Range(800, 200)]
+    assert row.dest_for_src(Range(8, 2)) == [(8 ,2)]
+    assert row.dest_for_src(Range(800, 200)) == [(800, 200)]
+
+
+def test_for_src2():
+    row1 = Row([0, 15, 37])
+    assert row1.dest_for_src(Range(31, 14)) == [(16, 14)]
+
+
+def test_for_src3():
+    row = Row([68, 64, 13])
+    assert row.dest_for_src(Range(72, 14)) == [(76, 5), (77, 9)]
 
 
 def test_range():

@@ -28,6 +28,9 @@ class Range:
     def extent(self):
         return self._extent
 
+    def pair(self):
+        return self._start, self._extent
+
     def contains(self, r):
         return r.start() >= self._start and r.end() <= self.end()
 
@@ -66,28 +69,25 @@ class Row:
         if tgt.start() == self.src.start():
             start = self.dest.start()
         else:
-            start = self.src.start() + ((tgt.start() - 1) - self.src.end())
+            x = tgt.start() - self.src.start()
+            start = x + self.dest.start()
 
         return Range(start, tgt.extent())
 
     def overlapped(self, tgt):
         if tgt.start() <= self.src.start() <= tgt.end():
-            if tgt.start() == self.src.start():
-                start1 = self.dest.start()
-                extent1 = self.dest.extent()
-            else:
-                start1 = self.src.start() - (self.src.start() - tgt.start())
-                extent1 = self.src.start() - start1
+            start1 = self.dest.start()
+            extent1 = tgt.extent() - (self.src.start() - tgt.start())
 
             r1 = Range(start1, extent1)
-            r2 = Range(self.src.start(), tgt.extent() - r1.extent())
-            return [r1, r2]
+            #r2 = Range(self.src.start(), tgt.extent() - r1.extent())
+            return [r1.pair()] #, r2.pair()]
 
         if self.src.start() <= tgt.start() <= self.src.end() <= tgt.end():
-            start = self.src.start() + ((tgt.start() - 1) - self.src.end())
+            start = self.dest.start() + (tgt.start() - self.src.start())
             r1 = Range(start, (self.dest.end() + 1) - start)
-            r2 = Range(self.src.end()+1, tgt.extent() - r1.extent())
-            return [r1, r2]
+            #r2 = Range(self.src.end()+1, tgt.extent() - r1.extent())
+            return [r1.pair()] #, r2.pair()]
 
     def overlaps(self, tgt):
         if tgt.start() <= self.src.start() <= tgt.end():
@@ -110,15 +110,15 @@ class Row:
     def dest_for_src(self, tgt):
         # Fully contained
         if self.src_contains(tgt):
-            return [self.dest_range(tgt)]
+            return [self.dest_range(tgt).pair()]
 
         # Overlap
         if self.overlaps(tgt):
             return self.overlapped(tgt)
 
-        # Fully outside
-        if self.outside(tgt):
-            return [tgt]
+        # # Fully outside
+        # if self.outside(tgt):
+        #     return [tgt.pair()]
 
     def __repr__(self):
         return "Row: Src: {}, Dest: {}".format(self.src, self.dest)
@@ -228,91 +228,6 @@ def get_location(seed, data):
     return location
 
 
-def range_end(r):
-    return r[0] + (r[1] - 1)
-
-
-def src_range(container):
-    return container[1], container[2]
-
-
-def dest_range(container):
-    return container[0], container[2]
-
-
-def contains(container, target):
-    return target[0] >= src[0] and range_end(target) <= range_end((container[1], container[2]))
-
-
-def outside(container, target):
-    # print("{} > {} or {} < {}".format(
-    #     target[0], container[1]+(container[2]-1), target[0] + target[1], container[1]))
-    if target[0] > container[1] + (container[2] - 1) or target[0] + target[1] < container[1]:
-        return True
-
-
-def overlap(container, target):
-    if target[0] < container[1] <= range_end(target):
-        return True
-
-    if container[1] < target[0] < range_end((container[1], container[2])):
-        return True
-
-    return False
-
-
-def get_destination(target, data):
-    start_index = data[0] + (target[0] - data[1])
-    return start_index, target[1]
-
-
-def get_overlap_dest(target, data):
-    if target[0] - data[1] < 0:
-        a_start = target[0]
-        a_end = data[1] - 1
-        b_start = data[0]
-        b_end = target[1] - (a_end - (a_start - 1))
-
-        r1 = a_start, a_end - (a_start - 1)
-        r2 = b_start, b_end,
-
-    else:
-        dest_start = data[0] + (target[0] - data[1])
-        src_end = data[1] + (data[2] - 1)
-        dest_end = data[0] + (data[2] - 1)
-
-        r1 = dest_start, (dest_end + 1 - dest_start)
-        r2 = src_end + 1, (target[1] - r1[1])
-
-    return [r1, r2]
-
-
-def map_range(tgt, data):
-    tr = Range.create(tgt)
-    row = Row(data)
-
-    if row.src_contains(tr):
-        return [row.dest_range(tr)]
-
-    # match = [row for row in sorted(data) if contains(row, tgt)]
-    # if match:
-    #     return [get_destination(tgt, match[0])]
-
-    overlap_match = [row for row in sorted(data, key=lambda x: x[1]) if overlap(row, tgt)]
-    if overlap_match:
-        overlaps = []
-        for o in overlap_match:
-            overlaps.append(get_overlap_dest(tgt, o))
-        lll = [item for sub_list in overlaps for item in sub_list]
-        return lll
-
-    outside_match = [row for row in sorted(data) if outside(row, tgt)]
-    if len(outside_match) == len(data):
-        return [tgt]
-
-    raise Exception("Why?")
-
-
 def part2(data):
     """Solve part 2."""
     print("\nStart Part 2")
@@ -321,41 +236,106 @@ def part2(data):
 
     result = []
     for row in seeds:
-        for x in map_range(row, data['seed-to-soil']):
-            result.append(x)
+        row_map = []
+        for data_row in data['seed-to-soil']:
+            r = Row(data_row)
+            dst = r.dest_for_src(Range.create(row))
+            if dst:
+                row_map.extend(dst)
+        result.extend(row_map)
+
+    result1 = []
+    for rng in result:
+        row_map = []
+        for data_row in data['soil-to-fertilizer']:
+            r = Row(data_row)
+            dst = r.dest_for_src(Range.create(rng))
+            if dst:
+                row_map.extend(dst)
+        if not row_map:
+            row_map.append(rng)
+        result1.extend(row_map)
+
+    result1 = sorted(list(dict.fromkeys(result1)), key=lambda x: x[1])
+    print("Result 1: {}".format(result1))
 
     result2 = []
-    for row in result:
-        for x in map_range(row, data['soil-to-fertilizer']):
-            result2.append(x)
+    for rng in result1:
+        row_map = []
+        for data_row in data['fertilizer-to-water']:
+            r = Row(data_row)
+            dst = r.dest_for_src(Range.create(rng))
+            if dst:
+                row_map.extend(dst)
+        if not row_map:
+            row_map.append(rng)
+        result2.extend(row_map)
+
+    result2 = sorted(list(dict.fromkeys(result2)), key=lambda x: x[1])
+    print("Result 2: {}".format(result2))
 
     result3 = []
-    for row in result2:
-        for x in map_range(row, data['fertilizer-to-water']):
-            result3.append(x)
+    for rng in result2:
+        row_map = []
+        for data_row in data['water-to-light']:
+            r = Row(data_row)
+            dst = r.dest_for_src(Range.create(rng))
+            if dst:
+                row_map.extend(dst)
+        if not row_map:
+            row_map.append(rng)
+        result3.extend(row_map)
+
+    result3 = sorted(list(dict.fromkeys(result3)), key=lambda x: x[1])
+    print("Result 3: {}".format(result3))
 
     result4 = []
-    for row in result3:
-        for x in map_range(row, data['water-to-light']):
-            result4.append(x)
+    for rng in result3:
+        row_map = []
+        for data_row in data['light-to-temperature']:
+            r = Row(data_row)
+            dst = r.dest_for_src(Range.create(rng))
+            if dst:
+                row_map.extend(dst)
+        if not row_map:
+            row_map.append(rng)
+        result4.extend(row_map)
+
+    result4 = sorted(list(dict.fromkeys(result4)), key=lambda x: x[1])
+    print("Result 4: {}".format(result4))
 
     result5 = []
-    for row in result4:
-        for x in map_range(row, data['light-to-temperature']):
-            result5.append(x)
+    for rng in result4:
+        row_map = []
+        for data_row in data['temperature-to-humidity']:
+            r = Row(data_row)
+            dst = r.dest_for_src(Range.create(rng))
+            if dst:
+                row_map.extend(dst)
+        if not row_map:
+            row_map.append(rng)
+        result5.extend(row_map)
+
+    result5 = sorted(list(dict.fromkeys(result5)), key=lambda x: x[1])
+    print("Result 5: {}".format(result5))
 
     result6 = []
-    for row in result5:
-        for x in map_range(row, data['temperature-to-humidity']):
-            result6.append(x)
+    for rng in result5:
+        row_map = []
+        for data_row in data['humidity-to-location']:
+            r = Row(data_row)
+            dst = r.dest_for_src(Range.create(rng))
+            if dst:
+                row_map.extend(dst)
+        if not row_map:
+            row_map.append(rng)
+        result6.extend(row_map)
 
-    result7 = []
-    for row in result6:
-        for x in map_range(row, data['humidity-to-location']):
-            result7.append(x)
+    result6 = sorted(list(dict.fromkeys(result6)), key=lambda x: x[1])
+    print("Result: {}".format(result6))
 
-    lowest = sorted(result7)[0][0]
-    # print("Lowest Location: {}".format(lowest))
+    lowest = sorted(result6)[0][0]
+    print("Lowest Location: {}".format(lowest))
     return lowest
 
 
