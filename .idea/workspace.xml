@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="59f98ace-f199-4728-9ae5-c72622f91a4f" name="Changes" comment="Switch to using classes to prevent stupid errors">
+    <list default="true" id="59f98ace-f199-4728-9ae5-c72622f91a4f" name="Changes" comment="Closer to having the logic in place. There is an issue with overlapping ranges. I think the easiest solution is to invert the matching.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/2023/05_seed_fertilizer/aoc202305.py" beforeDir="false" afterPath="$PROJECT_DIR$/2023/05_seed_fertilizer/aoc202305.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2023/05_seed_fertilizer/test_aoc202305.py" beforeDir="false" afterPath="$PROJECT_DIR$/2023/05_seed_fertilizer/test_aoc202305.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -277,7 +276,15 @@
       <option name="project" value="LOCAL" />
       <updated>1702130204222</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Closer to having the logic in place. There is an issue with overlapping ranges. I think the easiest solution is to invert the matching.">
+      <option name="closed" value="true" />
+      <created>1702215433324</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1702215433324</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -308,7 +315,8 @@
     <MESSAGE value="Part 2 is taking hours. Something is off on the approach. This attempt used processes, but backing that out." />
     <MESSAGE value="Part 2 now works for the example data but fails for the full data set. Getting closer." />
     <MESSAGE value="Switch to using classes to prevent stupid errors" />
-    <option name="LAST_COMMIT_MESSAGE" value="Switch to using classes to prevent stupid errors" />
+    <MESSAGE value="Closer to having the logic in place. There is an issue with overlapping ranges. I think the easiest solution is to invert the matching." />
+    <option name="LAST_COMMIT_MESSAGE" value="Closer to having the logic in place. There is an issue with overlapping ranges. I think the easiest solution is to invert the matching." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -335,28 +343,38 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/2023/05_seed_fertilizer/aoc202305.py</url>
-          <line>291</line>
+          <line>339</line>
           <option name="timeStamp" value="324" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/2023/05_seed_fertilizer/aoc202305.py</url>
-          <line>301</line>
+          <line>349</line>
           <option name="timeStamp" value="328" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/2023/05_seed_fertilizer/aoc202305.py</url>
-          <line>89</line>
-          <option name="timeStamp" value="335" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/2023/05_seed_fertilizer/aoc202305.py</url>
-          <line>303</line>
+          <line>351</line>
           <option name="timeStamp" value="336" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/2023/05_seed_fertilizer/aoc202305.py</url>
-          <line>78</line>
-          <option name="timeStamp" value="337" />
+          <line>273</line>
+          <option name="timeStamp" value="347" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/2023/05_seed_fertilizer/aoc202305.py</url>
+          <line>239</line>
+          <option name="timeStamp" value="361" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/2023/05_seed_fertilizer/aoc202305.py</url>
+          <line>112</line>
+          <option name="timeStamp" value="362" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/2023/05_seed_fertilizer/aoc202305.py</url>
+          <line>241</line>
+          <option name="timeStamp" value="363" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
