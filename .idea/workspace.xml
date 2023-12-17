@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="59f98ace-f199-4728-9ae5-c72622f91a4f" name="Changes" comment="Closer to having the logic in place. There is an issue with overlapping ranges. I think the easiest solution is to invert the matching.">
+    <list default="true" id="59f98ace-f199-4728-9ae5-c72622f91a4f" name="Changes" comment="Yet anothe approach.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/2023/05_seed_fertilizer/aoc202305.py" beforeDir="false" afterPath="$PROJECT_DIR$/2023/05_seed_fertilizer/aoc202305.py" afterDir="false" />
     </list>
@@ -51,7 +51,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2023/05_seed_fertilizer/aoc202305.py" />
-      <option name="PARAMETERS" value="example1.txt" />
+      <option name="PARAMETERS" value="input.txt" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -284,7 +284,15 @@
       <option name="project" value="LOCAL" />
       <updated>1702215433324</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Yet anothe approach.">
+      <option name="closed" value="true" />
+      <created>1702325990604</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1702325990604</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -316,7 +324,8 @@
     <MESSAGE value="Part 2 now works for the example data but fails for the full data set. Getting closer." />
     <MESSAGE value="Switch to using classes to prevent stupid errors" />
     <MESSAGE value="Closer to having the logic in place. There is an issue with overlapping ranges. I think the easiest solution is to invert the matching." />
-    <option name="LAST_COMMIT_MESSAGE" value="Closer to having the logic in place. There is an issue with overlapping ranges. I think the easiest solution is to invert the matching." />
+    <MESSAGE value="Yet anothe approach." />
+    <option name="LAST_COMMIT_MESSAGE" value="Yet anothe approach." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -343,40 +352,27 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/2023/05_seed_fertilizer/aoc202305.py</url>
-          <line>339</line>
+          <line>504</line>
           <option name="timeStamp" value="324" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/2023/05_seed_fertilizer/aoc202305.py</url>
-          <line>349</line>
+          <line>514</line>
           <option name="timeStamp" value="328" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/2023/05_seed_fertilizer/aoc202305.py</url>
-          <line>351</line>
+          <line>516</line>
           <option name="timeStamp" value="336" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/2023/05_seed_fertilizer/aoc202305.py</url>
-          <line>273</line>
-          <option name="timeStamp" value="347" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/2023/05_seed_fertilizer/aoc202305.py</url>
-          <line>239</line>
-          <option name="timeStamp" value="361" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/2023/05_seed_fertilizer/aoc202305.py</url>
-          <line>112</line>
-          <option name="timeStamp" value="362" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/2023/05_seed_fertilizer/aoc202305.py</url>
-          <line>241</line>
-          <option name="timeStamp" value="363" />
-        </line-breakpoint>
       </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
     </breakpoint-manager>
   </component>
 </project>

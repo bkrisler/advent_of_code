@@ -83,7 +83,9 @@ class Row:
 
         if self.src.start() <= tgt.start() <= self.src.end() <= tgt.end():
             start = self.dest.start() + (tgt.start() - self.src.start())
-            return Range(start, (self.dest.end() + 1) - start).pair()
+            extent = (self.dest.end() + 1) - start
+            remainder = tgt.start() + extent, tgt.end() + 1 - (tgt.start() + extent)
+            return Range(start, extent).pair(), remainder
 
     def overlaps(self, tgt):
         if tgt.start() <= self.src.start() <= tgt.end():
@@ -212,46 +214,209 @@ def row_match(inn, data):
     result = defaultdict(list)
     for row in data:
         r = Row(row)
-        if r.src_contains(in_range):
+        if r.src_contains(in_range) or r.overlaps(in_range):
             result[inn].append(row)
 
     return result
 
 
-def partial_match(inn, data):
-    in_range = Range.create(inn)
-    result = defaultdict(list)
-    for row in data:
-        r = Row(row)
-        if r.overlaps(in_range):
-            res = r.overlapped(in_range)
-            result[inn].append(res)
-
-    return result
-
-
 def advance_row(inn, data, map_name):
-    print("{} with: {}".format(map_name, inn))
+    print("\n{} with: {}".format(map_name, sorted(inn)))
     nxt_row = []
+    matched = None
     for seed in inn:
-        matches = row_match(seed, data)
-        # if not matches:
-        #     partial_matches = partial_match(seed, data)
-        #     nxt_row.append([Row(row).partial_match(Range.create(k)) for row in v])
-        for k, v in matches.items():
-            nxt_row.append([Row(row).dest_for_src(Range.create(k)) for row in v])
+        matched = row_match(seed, data)
+        for k, v in matched.items():
+            for vv in v:
+                if Row(vv).src_contains(Range.create(k)):
+                    nxt_row.append([Row(vv).dest_for_src(Range.create(k))])
+                else:
+                    print("Partial")
+
+    if not matched:
+        return inn
 
     return [y[0] for y in nxt_row]
 
 
+def process_overlap(seed, data):
+    result = []
+    for d in data:
+        print("Here: {} and {}".format(seed, d))
+        x, remainder = Row(d).overlapped(Range.create(seed))
+        result.append(x)
+
+        if x[1] < Range.create(seed).extent():
+            print("We have extra to deal with")
+
+    return result
+
+
+def process_seed(seed, data):
+    result = defaultdict(lambda: defaultdict(list))
+    s = Range.create(seed)
+    for row in data:
+        if Row(row).src_contains(s):
+            result[seed]['contains'].append(row)
+        elif Row(row).overlaps(s):
+            result[seed]['overlaps'].append(row)
+        else:
+            result[seed]['outside'].append(row)
+
+    if result[seed]['contains']:
+        answer = Row(result[seed]['contains'][0]).dest_for_src(s)
+        return answer
+
+    if result[seed]['overlaps']:
+        return process_overlap(seed, result[seed]['overlaps'])
+
+    return seed
+
+
+def poverlap(seed, data):
+    result = []
+    for d in data:
+        print("Here: {} and {}".format(seed, d))
+        x, remainder = Row(d).overlapped(Range.create(seed))
+        result.append(x)
+        if remainder:
+            result.append(poverlap(seed, data))
+
+    return result
+
+
+def pseed(seed, data):
+    s = Range.create(seed)
+    for row in data:
+        r = Row(row)
+        if r.src_contains(s):
+            return r.dest_for_src(s)
+        elif r.overlaps(s):
+            result = poverlap(s)
+            print(result)
+
+    return None
+
+
+def src_end(row):
+    return row[1] + (row[2] - 1)
+
+
+def dest_start(seed, row):
+    return row[0] + (seed[0] - row[1])
+
+
+def next_seed(seed, row, nxt_row):
+    if seed[0] >= row[1] and seed[0] + (seed[1] - 1) <= row[1] + (row[2] - 1):
+        # Fully contains
+        ds = dest_start(seed, row)
+        return [(ds, seed[1])]
+    elif seed[0] >= row[1] and seed[0] + (seed[1] - 1) > row[1] + (row[2] - 1):
+        # Overlaps
+        if nxt_row is not None:
+            if row[1] + (row[2] - 1) != nxt_row[1] - 1:
+                #print("There is a gap! Row A ends at: {} and Row B starts at: {}".format(row[1] + (row[2] - 1), nxt_row[1]))
+                p3x = row[1] + (row[2])
+                p3y = nxt_row[1] - 1
+                p3 = (p3x, p3y)
+                p1_start = dest_start(seed, row)
+                p1_extent = (row[0] + row[2]) - p1_start
+                p1 = (p1_start, p1_extent)
+                nxt_seed = seed[0] + p1_extent, seed[1] - p1_extent
+                p2a = dest_start(nxt_seed, nxt_row)
+                p2 = (p2a, nxt_seed[1])
+                return [p1, p2, p3]
+            else:
+                p1_start = dest_start(seed, row)
+                p1_extent = (row[0] + row[2]) - p1_start
+                p1 = (p1_start, p1_extent)
+                nxt_seed = seed[0] + p1_extent, seed[1] - p1_extent
+                p2a = dest_start(nxt_seed, nxt_row)
+                p2 = (p2a, nxt_seed[1])
+                return [p1, p2]
+        else:
+            ds = dest_start(seed, row)
+            if seed[1] > row[2] - (seed[0] - row[1]):
+                p1 = ds, (seed[0] - row[1])
+                p2 = seed[0] + (seed[0] - row[1]), seed[1] - (seed[0] - row[1])
+                return [p1, p2]
+
+
+def get_next(seed, data):
+    sorted_data = sorted(data, key=lambda x: x[1])
+    for idx, row in enumerate(sorted_data):
+        if row[1] <= seed[0] <= src_end(row):
+            nr = sorted_data[idx+1] if len(sorted_data) > idx+1 else None
+            return next_seed(seed, row, nr)
+
+    return [seed]
+
+
 def part2(data):
+    seeds = list(zip(data['seeds'][::2], data['seeds'][1::2]))
+
+    result = []
+    print("Seed-to-soil")
+    for seed in sorted(seeds):
+        nxt = get_next(seed, data['seed-to-soil'])
+        result.extend(nxt)
+        print("{} converts to {}".format(seed, nxt))
+
+    result2 = []
+    print("\nSoil-to-fertilizer")
+    for seed in sorted(result):
+        nxt = get_next(seed, data['soil-to-fertilizer'])
+        result2.extend(nxt)
+        print("{} converts to {}".format(seed, nxt))
+
+    result3 = []
+    print("\nFertilizer-to-water")
+    for seed in sorted(result2):
+        nxt = get_next(seed, data['fertilizer-to-water'])
+        result3.extend(nxt)
+        print("{} converts to {}".format(seed, nxt))
+
+    result4 = []
+    print("\nWater-to-light")
+    for seed in sorted(result3):
+        nxt = get_next(seed, data['water-to-light'])
+        result4.extend(nxt)
+        print("{} converts to {}".format(seed, nxt))
+
+    result5 = []
+    print("\nLight-to-temperature")
+    for seed in sorted(result4):
+        nxt = get_next(seed, data['light-to-temperature'])
+        result5.extend(nxt)
+        print("{} converts to {}".format(seed, nxt))
+
+    result6 = []
+    print("\nTemperature-to-humidity")
+    for seed in sorted(result5):
+        nxt = get_next(seed, data['temperature-to-humidity'])
+        result6.extend(nxt)
+        print("{} converts to {}".format(seed, nxt))
+
+    result7 = []
+    print("\nHumidity-to-location")
+    for seed in sorted(result6):
+        nxt = get_next(seed, data['humidity-to-location'])
+        result7.extend(nxt)
+        print("{} converts to {}".format(seed, nxt))
+
+    print()
+
+    return sorted(result6)[0][0]
+
+
+def part2_2(data):
     inn = list(zip(data['seeds'][::2], data['seeds'][1::2]))
 
     a = advance_row(inn, data['seed-to-soil'], 'seed-to-soil')
     b = advance_row(a, data['soil-to-fertilizer'], 'soil-to-fertilizer')
     c = advance_row(b, data['fertilizer-to-water'], 'fertilizer-to-water')
 
-    print("Result: {}".format(b))
+    print("Result for Fertilizer-to-Waster: {}".format(sorted(c)))
 
 
 def part2_orig(data):
