@@ -201,103 +201,6 @@ def part1(data):
     return min(locations)
 
 
-def get_mapped(row, seed):
-    r = Row(row)
-    s = Range.create(seed)
-    mapped = r.dest_for_src(s)
-    unmapped = r.unmapped(s)
-    return mapped, unmapped
-
-
-def row_match(inn, data):
-    in_range = Range.create(inn)
-    result = defaultdict(list)
-    for row in data:
-        r = Row(row)
-        if r.src_contains(in_range) or r.overlaps(in_range):
-            result[inn].append(row)
-
-    return result
-
-
-def advance_row(inn, data, map_name):
-    print("\n{} with: {}".format(map_name, sorted(inn)))
-    nxt_row = []
-    matched = None
-    for seed in inn:
-        matched = row_match(seed, data)
-        for k, v in matched.items():
-            for vv in v:
-                if Row(vv).src_contains(Range.create(k)):
-                    nxt_row.append([Row(vv).dest_for_src(Range.create(k))])
-                else:
-                    print("Partial")
-
-    if not matched:
-        return inn
-
-    return [y[0] for y in nxt_row]
-
-
-def process_overlap(seed, data):
-    result = []
-    for d in data:
-        print("Here: {} and {}".format(seed, d))
-        x, remainder = Row(d).overlapped(Range.create(seed))
-        result.append(x)
-
-        if x[1] < Range.create(seed).extent():
-            print("We have extra to deal with")
-
-    return result
-
-
-def process_seed(seed, data):
-    result = defaultdict(lambda: defaultdict(list))
-    s = Range.create(seed)
-    for row in data:
-        if Row(row).src_contains(s):
-            result[seed]['contains'].append(row)
-        elif Row(row).overlaps(s):
-            result[seed]['overlaps'].append(row)
-        else:
-            result[seed]['outside'].append(row)
-
-    if result[seed]['contains']:
-        answer = Row(result[seed]['contains'][0]).dest_for_src(s)
-        return answer
-
-    if result[seed]['overlaps']:
-        return process_overlap(seed, result[seed]['overlaps'])
-
-    return seed
-
-
-def poverlap(seed, data):
-    result = []
-    for d in data:
-        print("Here: {} and {}".format(seed, d))
-        x, remainder = Row(d).overlapped(Range.create(seed))
-        result.append(x)
-        if remainder:
-            result.append(poverlap(seed, data))
-
-    return result
-
-
-def pseed(seed, data):
-    s = Range.create(seed)
-    for row in data:
-        r = Row(row)
-        if r.src_contains(s):
-            return r.dest_for_src(s)
-        elif r.overlaps(s):
-            result = poverlap(s)
-            print(result)
-
-    return None
-
-
 def src_end(row):
     return row[1] + (row[2] - 1)
 
@@ -307,24 +210,24 @@ def dest_start(seed, row):
 
 
 def next_seed(seed, row, nxt_row):
-    if seed[0] >= row[1] and seed[0] + (seed[1] - 1) <= row[1] + (row[2] - 1):
+    if seed[0] >= row[1] and seed[0] + (seed[1] - 1) <= src_end(row):
         # Fully contains
         ds = dest_start(seed, row)
         return [(ds, seed[1])]
-    elif seed[0] >= row[1] and seed[0] + (seed[1] - 1) > row[1] + (row[2] - 1):
+    elif seed[0] >= row[1] and seed[0] + (seed[1] - 1) > src_end(row):
         # Overlaps
         if nxt_row is not None:
-            if row[1] + (row[2] - 1) != nxt_row[1] - 1:
-                #print("There is a gap! Row A ends at: {} and Row B starts at: {}".format(row[1] + (row[2] - 1), nxt_row[1]))
-                p3x = row[1] + (row[2])
-                p3y = nxt_row[1] - 1
-                p3 = (p3x, p3y)
+            if src_end(row) != nxt_row[1] - 1:
                 p1_start = dest_start(seed, row)
                 p1_extent = (row[0] + row[2]) - p1_start
                 p1 = (p1_start, p1_extent)
-                nxt_seed = seed[0] + p1_extent, seed[1] - p1_extent
-                p2a = dest_start(nxt_seed, nxt_row)
-                p2 = (p2a, nxt_seed[1])
+
+                p2 = (row[1] + (row[2]), nxt_row[1] - 1)
+
+                nxt_seed = p2[0] + p2[1], seed[1] - (p1[1] + p2[1])
+                p3a = dest_start(nxt_seed, nxt_row)
+                p3 = (p3a, nxt_seed[1])
+
                 return [p1, p2, p3]
             else:
                 p1_start = dest_start(seed, row)
@@ -406,150 +309,7 @@ def part2(data):
 
     print()
 
-    return sorted(result6)[0][0]
-
-
-def part2_2(data):
-    inn = list(zip(data['seeds'][::2], data['seeds'][1::2]))
-
-    a = advance_row(inn, data['seed-to-soil'], 'seed-to-soil')
-    b = advance_row(a, data['soil-to-fertilizer'], 'soil-to-fertilizer')
-    c = advance_row(b, data['fertilizer-to-water'], 'fertilizer-to-water')
-
-    print("Result for Fertilizer-to-Waster: {}".format(sorted(c)))
-
-
-def part2_orig(data):
-    """Solve part 2."""
-    print("\nStart Part 2")
-
-    input = list(zip(data['seeds'][::2], data['seeds'][1::2]))
-    result = []
-    print("Seed to Soil")
-    for row in data['seed-to-soil']:
-        for seed in input:
-            mapped, unmapped = get_mapped(row, seed)
-            if mapped:
-                result.append(mapped)
-                print("Seed: {} maps to: {}".format(seed, mapped))
-            if unmapped:
-                print("Seed: {} also maps to: {}".format(seed, unmapped))
-
-
-    input = result.copy()
-    print("Soil To Fertilizer")
-    for row in data['soil-to-fertilizer']:
-        for seed in input:
-            mapped, unmapped = get_mapped(row, seed)
-            if mapped:
-                print("Seed: {} maps to: {}".format(seed, mapped))
-            if unmapped:
-                print("Seed: {} also maps to: {}".format(seed, unmapped))
-
-
-    # result = []
-    # for row in seeds:
-    #     row_map = []
-    #     for data_row in data['seed-to-soil']:
-    #         r = Row(data_row)
-    #         dst = r.dest_for_src(Range.create(row))
-    #         if dst:
-    #             row_map.extend(dst)
-    #     result.extend(row_map)
-    #
-    # result1 = []
-    # for rng in result:
-    #     row_map = []
-    #     for data_row in data['soil-to-fertilizer']:
-    #         r = Row(data_row)
-    #         dst = r.dest_for_src(Range.create(rng))
-    #         if dst:
-    #             row_map.extend(dst)
-    #     if not row_map:
-    #         row_map.append(rng)
-    #     result1.extend(row_map)
-    #
-    # result1 = sorted(list(dict.fromkeys(result1)), key=lambda x: x[1])
-    # print("Result 1: {}".format(result1))
-    #
-    # result2 = []
-    # for rng in result1:
-    #     row_map = []
-    #     for data_row in data['fertilizer-to-water']:
-    #         r = Row(data_row)
-    #         dst = r.dest_for_src(Range.create(rng))
-    #         if dst:
-    #             row_map.extend(dst)
-    #     if not row_map:
-    #         row_map.append(rng)
-    #     result2.extend(row_map)
-    #
-    # result2 = sorted(list(dict.fromkeys(result2)), key=lambda x: x[1])
-    # print("Result 2: {}".format(result2))
-    #
-    # result3 = []
-    # for rng in result2:
-    #     row_map = []
-    #     for data_row in data['water-to-light']:
-    #         r = Row(data_row)
-    #         dst = r.dest_for_src(Range.create(rng))
-    #         if dst:
-    #             row_map.extend(dst)
-    #     if not row_map:
-    #         row_map.append(rng)
-    #     result3.extend(row_map)
-    #
-    # result3 = sorted(list(dict.fromkeys(result3)), key=lambda x: x[1])
-    # print("Result 3: {}".format(result3))
-    #
-    # result4 = []
-    # for rng in result3:
-    #     row_map = []
-    #     for data_row in data['light-to-temperature']:
-    #         r = Row(data_row)
-    #         dst = r.dest_for_src(Range.create(rng))
-    #         if dst:
-    #             row_map.extend(dst)
-    #     if not row_map:
-    #         row_map.append(rng)
-    #     result4.extend(row_map)
-    #
-    # result4 = sorted(list(dict.fromkeys(result4)), key=lambda x: x[1])
-    # print("Result 4: {}".format(result4))
-    #
-    # result5 = []
-    # for rng in result4:
-    #     row_map = []
-    #     for data_row in data['temperature-to-humidity']:
-    #         r = Row(data_row)
-    #         dst = r.dest_for_src(Range.create(rng))
-    #         if dst:
-    #             row_map.extend(dst)
-    #     if not row_map:
-    #         row_map.append(rng)
-    #     result5.extend(row_map)
-    #
-    # result5 = sorted(list(dict.fromkeys(result5)), key=lambda x: x[1])
-    # print("Result 5: {}".format(result5))
-    #
-    # result6 = []
-    # for rng in result5:
-    #     row_map = []
-    #     for data_row in data['humidity-to-location']:
-    #         r = Row(data_row)
-    #         dst = r.dest_for_src(Range.create(rng))
-    #         if dst:
-    #             row_map.extend(dst)
-    #     if not row_map:
-    #         row_map.append(rng)
-    #     result6.extend(row_map)
-    #
-    # result6 = sorted(list(dict.fromkeys(result6)), key=lambda x: x[1])
-    # print("Result: {}".format(result6))
-    #
-    # lowest = sorted(result6)[0][0]
-    # print("Lowest Location: {}".format(lowest))
-    # return lowest
+    return sorted(result7)[0][0]
 
 
 def solve(puzzle_input):
