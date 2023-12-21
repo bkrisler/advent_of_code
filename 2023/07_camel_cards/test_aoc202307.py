@@ -83,6 +83,59 @@ def test_second_order():
     assert aoc202307.second_order('77888', '77788') == '77888'
 
 
+def test_rank_p2():
+    assert sorted(['Q2Q2Q', 'JJJJ2', '2JJJJ', '2AAAA'], key=aoc202307.find_type_two) == ['Q2Q2Q', '2AAAA', 'JJJJ2', '2JJJJ']
+
+
+def test_full_house():
+    inn = ['2233J', '22334']
+    out = ['22334', '2233J']
+    assert aoc202307.rank_sort_p2(inn) == out
+
+    inn = ['2233J', 'QQKJK']
+    out = ['2233J', 'QQKJK']
+    assert aoc202307.rank_sort_p2(inn) == out
+
+    inn = ['JJJ34', 'QQKJK']
+    out = ['QQKJK', 'JJJ34']
+    assert aoc202307.rank_sort_p2(inn) == out
+
+    inn = ['2345J', 'QQKJK']
+    out = ['2345J', 'QQKJK']
+    assert aoc202307.rank_sort_p2(inn) == out
+
+    inn = ['4T48J', 'QQKJK']
+    out = ['4T48J', 'QQKJK']
+    assert aoc202307.rank_sort_p2(inn) == out
+
+    inn = ['4T48J', 'JJJJJ']
+    out = ['4T48J', 'JJJJJ']
+    assert aoc202307.rank_sort_p2(inn) == out
+
+
+def test_second_order_p2():
+    assert aoc202307.second_order_p2('23456', '23457') == -1
+    assert aoc202307.second_order_p2('23457', '23456') == 1
+    assert aoc202307.second_order_p2('J2345', 'J3426') == -1
+    assert aoc202307.second_order_p2('AAAAQ', 'AAAAT') == 1
+    assert aoc202307.second_order_p2('JJJJJ', 'QQQQQ') == -1
+    assert aoc202307.second_order_p2('2345J', '23455') == -1
+
+
+def test_rank_sort_p2():
+    assert aoc202307.rank_sort_p2(['AAAAA', 'JJJJJ']) == ['JJJJJ', 'AAAAA']
+    assert aoc202307.rank_sort_p2(['AAAAA', 'JJJJJ', '55555']) == ['JJJJJ', '55555', 'AAAAA']
+    inn = ['23456', 'AAAAA', 'JJJJJ', '2345J', '22345', '4J499', '44355', '667JJ', '55566', '44J9J']
+    out = ['23456', '22345', '2345J', '44355', '4J499', '55566', '44J9J', '667JJ', 'JJJJJ', 'AAAAA']
+    assert aoc202307.rank_sort_p2(inn) == out
+    assert aoc202307.rank_sort_p2(['23458', '8642A']) == ['23458', '8642A']
+    inn = ['8888J', 'AAAAJ', 'J345J', '44556', '23456', 'J4J55', 'J3456']
+    out = ['23456', 'J3456', '44556', 'J345J', 'J4J55', '8888J', 'AAAAJ']
+    assert aoc202307.rank_sort_p2(inn) == out
+    assert aoc202307.rank_sort_p2(['98765', 'J2345']) == ['98765', 'J2345']
+    assert aoc202307.rank_sort_p2(['JJ987', 'JJ98J']) == ['JJ987', 'JJ98J']
+
+
 @pytest.mark.skip(reason="Not implemented")
 def test_part2_example1(example1):
     """Test part 2 on example input."""

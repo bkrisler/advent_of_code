@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="59f98ace-f199-4728-9ae5-c72622f91a4f" name="Changes" comment="Finished Day 7 part 1.">
+    <list default="true" id="59f98ace-f199-4728-9ae5-c72622f91a4f" name="Changes" comment="Fixed a few bugs but still not passing the test.">
+      <change afterPath="$PROJECT_DIR$/2023/07_camel_cards/input2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/2023/07_camel_cards/input3.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/2023/07_camel_cards/aoc202307.py" beforeDir="false" afterPath="$PROJECT_DIR$/2023/07_camel_cards/aoc202307.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2023/07_camel_cards/test_aoc202307.py" beforeDir="false" afterPath="$PROJECT_DIR$/2023/07_camel_cards/test_aoc202307.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +76,7 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_aoc202307.test_get_higher" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for test_aoc202307.test_full_house" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="advent_of_code" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -83,11 +86,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_aoc202307.test_get_higher&quot;" />
+      <option name="_new_target" value="&quot;test_aoc202307.test_full_house&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_aoc202307.test_high_card" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for test_aoc202307.test_rank_p2" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="advent_of_code" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -97,11 +100,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_aoc202307.test_high_card&quot;" />
+      <option name="_new_target" value="&quot;test_aoc202307.test_rank_p2&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_aoc202307.test_one_pair" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for test_aoc202307.test_rank_sort_p2" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="advent_of_code" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -111,11 +114,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_aoc202307.test_one_pair&quot;" />
+      <option name="_new_target" value="&quot;test_aoc202307.test_rank_sort_p2&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_aoc202307.test_second_order" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for test_aoc202307.test_second_order_p2" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="advent_of_code" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -125,25 +128,25 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_aoc202307.test_second_order&quot;" />
+      <option name="_new_target" value="&quot;test_aoc202307.test_second_order_p2&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <list>
       <item itemvalue="Python.aoc202307" />
       <item itemvalue="Python tests.Python tests for test_aoc202304.test_part1_example1" />
-      <item itemvalue="Python tests.Python tests for test_aoc202307.test_get_higher" />
-      <item itemvalue="Python tests.Python tests for test_aoc202307.test_high_card" />
-      <item itemvalue="Python tests.Python tests for test_aoc202307.test_one_pair" />
-      <item itemvalue="Python tests.Python tests for test_aoc202307.test_second_order" />
+      <item itemvalue="Python tests.Python tests for test_aoc202307.test_full_house" />
+      <item itemvalue="Python tests.Python tests for test_aoc202307.test_rank_p2" />
+      <item itemvalue="Python tests.Python tests for test_aoc202307.test_rank_sort_p2" />
+      <item itemvalue="Python tests.Python tests for test_aoc202307.test_second_order_p2" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.aoc202307" />
-        <item itemvalue="Python tests.Python tests for test_aoc202307.test_second_order" />
-        <item itemvalue="Python tests.Python tests for test_aoc202307.test_get_higher" />
-        <item itemvalue="Python tests.Python tests for test_aoc202307.test_high_card" />
-        <item itemvalue="Python tests.Python tests for test_aoc202307.test_one_pair" />
+        <item itemvalue="Python tests.Python tests for test_aoc202307.test_full_house" />
+        <item itemvalue="Python tests.Python tests for test_aoc202307.test_rank_p2" />
+        <item itemvalue="Python tests.Python tests for test_aoc202307.test_second_order_p2" />
+        <item itemvalue="Python tests.Python tests for test_aoc202307.test_rank_sort_p2" />
       </list>
     </recent_temporary>
   </component>
@@ -332,7 +335,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703039822888</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Fixed a few bugs but still not passing the test.">
+      <option name="closed" value="true" />
+      <created>1703129292371</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1703129292371</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -370,7 +381,8 @@
     <MESSAGE value="Finished part one of Day 6" />
     <MESSAGE value="Finished Day 6 part 2." />
     <MESSAGE value="Finished Day 7 part 1." />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished Day 7 part 1." />
+    <MESSAGE value="Fixed a few bugs but still not passing the test." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed a few bugs but still not passing the test." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -394,11 +406,6 @@
           <url>file://$PROJECT_DIR$/2023/04_scratchcards/test_aoc202304.py</url>
           <line>26</line>
           <option name="timeStamp" value="94" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/2023/07_camel_cards/aoc202307.py</url>
-          <line>164</line>
-          <option name="timeStamp" value="481" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

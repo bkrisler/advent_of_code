@@ -36,16 +36,14 @@ def find_type(hand):
 
 
 def find_type_two(hand):
-    result = 0
-
     res = Counter(hand)
     if 5 in res.values():
         # Five of a kind
         result = 6
     elif 4 in res.values():
         # Four of a kind
-        if 'J' in hand and int(res['J']) == 1:
-            # KKKKJ == KKKKK
+        if 'J' in hand: # and int(res['J']) == 4:
+            # JJJJ2 == 22222
             result = 6
             #print("{} is now 5 of a kind. Type {}".format(hand, result))
         else:
@@ -105,10 +103,7 @@ def get_higher(a, b, part=1):
     else:
         ranking = ['A', 'K', 'Q', 'J', 'T', '9', '8', '7', '6', '5', '4', '3', '2']
 
-    if ranking.index(a) < ranking.index(b):
-        return a
-    else:
-        return b
+    return a if ranking.index(a) < ranking.index(b) else b
 
 
 def second_order(hand1, hand2):
@@ -119,14 +114,8 @@ def second_order(hand1, hand2):
         for x in range(5):
             if hand1[x] != hand2[x]:
                 higher = get_higher(hand1[x], hand2[x])
-                if hand1[x] == higher:
-                    result = 1
-                    break
-                else:
-                    result = -1
-                    break
-    else:
-        result = 0
+                result = 1if hand1[x] == higher else -1
+                break
 
     #print("Compare: {} with {} == {}".format(hand1, hand2, result))
     return result
@@ -135,19 +124,13 @@ def second_order(hand1, hand2):
 def second_order_p2(hand1, hand2):
     t1 = find_type_two(hand1)
     t2 = find_type_two(hand2)
-    result = 0
+    result = 1 if t1 > t2 else -1
     if t1 == t2:
         for x in range(5):
             if hand1[x] != hand2[x]:
                 higher = get_higher(hand1[x], hand2[x], 2)
-                if hand1[x] == higher:
-                    result = 1
-                    break
-                else:
-                    result = -1
-                    break
-    else:
-        result = 0
+                result = 1 if hand1[x] == higher else -1
+                break
 
     #print("Compare: {} with {} == {}".format(hand1, hand2, result))
     return result
@@ -155,13 +138,13 @@ def second_order_p2(hand1, hand2):
 
 def rank_sort(hand):
     phase_1 = sorted(hand, key=find_type)
-    phase_2= sorted(phase_1, key=functools.cmp_to_key(second_order))
+    phase_2 = sorted(phase_1, key=functools.cmp_to_key(second_order))
     return phase_2
 
 
 def rank_sort_p2(hand):
     phase_1 = sorted(hand, key=find_type_two)
-    phase_2= sorted(phase_1, key=functools.cmp_to_key(second_order_p2))
+    phase_2 = sorted(phase_1, key=functools.cmp_to_key(second_order_p2))
     return phase_2
 
 
@@ -185,6 +168,7 @@ def part2(data):
     Second Attempt: 250769877 -- Too High
     Third Attempt:  250600944 -- Too High
     Fourth Attempt: 249541401 -- Incorrect
+    Fifth Attempt:  249505671 -- Incorrect
     """
     hand = [x[0] for x in data]
     bids = dict(data)
