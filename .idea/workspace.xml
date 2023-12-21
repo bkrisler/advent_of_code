@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="59f98ace-f199-4728-9ae5-c72622f91a4f" name="Changes" comment="Finished Day 6 part 2.">
-      <change afterPath="$PROJECT_DIR$/2023/07_camel_cards/aoc202307.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2023/07_camel_cards/example1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2023/07_camel_cards/example2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2023/07_camel_cards/input.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2023/07_camel_cards/test_aoc202307.py" afterDir="false" />
+    <list default="true" id="59f98ace-f199-4728-9ae5-c72622f91a4f" name="Changes" comment="Finished Day 7 part 1.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2023/07_camel_cards/aoc202307.py" beforeDir="false" afterPath="$PROJECT_DIR$/2023/07_camel_cards/aoc202307.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -328,7 +324,15 @@
       <option name="project" value="LOCAL" />
       <updated>1702949410749</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Finished Day 7 part 1.">
+      <option name="closed" value="true" />
+      <created>1703039822888</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1703039822888</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -365,7 +369,8 @@
     <MESSAGE value="Finally solved Day 6, Part 2." />
     <MESSAGE value="Finished part one of Day 6" />
     <MESSAGE value="Finished Day 6 part 2." />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished Day 6 part 2." />
+    <MESSAGE value="Finished Day 7 part 1." />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished Day 7 part 1." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -389,6 +394,11 @@
           <url>file://$PROJECT_DIR$/2023/04_scratchcards/test_aoc202304.py</url>
           <line>26</line>
           <option name="timeStamp" value="94" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/2023/07_camel_cards/aoc202307.py</url>
+          <line>164</line>
+          <option name="timeStamp" value="481" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
