@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="59f98ace-f199-4728-9ae5-c72622f91a4f" name="Changes" comment="Ugh. My &quot;magic&quot; nubmers were messed up. Switched to constants per hand and everything works. There is a lesson there kids.">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="59f98ace-f199-4728-9ae5-c72622f91a4f" name="Changes" comment="Stop tracking input files.">
+      <change afterPath="$PROJECT_DIR$/2023/08_haunted_wasteland/aoc202308.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/2023/08_haunted_wasteland/example1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/2023/08_haunted_wasteland/example2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/2023/08_haunted_wasteland/test_aoc202308.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/download_input.py" beforeDir="false" afterPath="$PROJECT_DIR$/download_input.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +41,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="Python.aoc202307">
+  <component name="RunManager" selected="Python.aoc202308">
     <configuration name="aoc202307" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="advent_of_code" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -50,6 +55,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2023/07_camel_cards/aoc202307.py" />
+      <option name="PARAMETERS" value="input.txt" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="aoc202308" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="advent_of_code" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2023/08_haunted_wasteland" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2023/08_haunted_wasteland/aoc202308.py" />
       <option name="PARAMETERS" value="input.txt" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -72,77 +98,63 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_aoc202307.test_full_house" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for test_aoc202308.test_parse_example1" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="advent_of_code" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2023/07_camel_cards" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2023/08_haunted_wasteland" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_aoc202307.test_full_house&quot;" />
+      <option name="_new_target" value="&quot;test_aoc202308.test_parse_example1&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_aoc202307.test_rank_p2" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for test_aoc202308.test_part1_example1" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="advent_of_code" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2023/07_camel_cards" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2023/08_haunted_wasteland" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_aoc202307.test_rank_p2&quot;" />
+      <option name="_new_target" value="&quot;test_aoc202308.test_part1_example1&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_aoc202307.test_rank_sort_p2" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for test_aoc202308.test_part1_example2" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="advent_of_code" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2023/07_camel_cards" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2023/08_haunted_wasteland" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_aoc202307.test_rank_sort_p2&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Python tests for test_aoc202307.test_second_order_p2" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="advent_of_code" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2023/07_camel_cards" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_aoc202307.test_second_order_p2&quot;" />
+      <option name="_new_target" value="&quot;test_aoc202308.test_part1_example2&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.aoc202308" />
       <item itemvalue="Python.aoc202307" />
       <item itemvalue="Python tests.Python tests for test_aoc202304.test_part1_example1" />
-      <item itemvalue="Python tests.Python tests for test_aoc202307.test_full_house" />
-      <item itemvalue="Python tests.Python tests for test_aoc202307.test_rank_p2" />
-      <item itemvalue="Python tests.Python tests for test_aoc202307.test_rank_sort_p2" />
-      <item itemvalue="Python tests.Python tests for test_aoc202307.test_second_order_p2" />
+      <item itemvalue="Python tests.Python tests for test_aoc202308.test_parse_example1" />
+      <item itemvalue="Python tests.Python tests for test_aoc202308.test_part1_example1" />
+      <item itemvalue="Python tests.Python tests for test_aoc202308.test_part1_example2" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.aoc202308" />
+        <item itemvalue="Python tests.Python tests for test_aoc202308.test_part1_example2" />
+        <item itemvalue="Python tests.Python tests for test_aoc202308.test_part1_example1" />
+        <item itemvalue="Python tests.Python tests for test_aoc202308.test_parse_example1" />
         <item itemvalue="Python.aoc202307" />
-        <item itemvalue="Python tests.Python tests for test_aoc202307.test_full_house" />
-        <item itemvalue="Python tests.Python tests for test_aoc202307.test_rank_p2" />
-        <item itemvalue="Python tests.Python tests for test_aoc202307.test_second_order_p2" />
-        <item itemvalue="Python tests.Python tests for test_aoc202307.test_rank_sort_p2" />
       </list>
     </recent_temporary>
   </component>
@@ -355,7 +367,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703247575868</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Stop tracking input files.">
+      <option name="closed" value="true" />
+      <created>1703247883916</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1703247883916</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -371,7 +391,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="2023 Day one finished!" />
     <MESSAGE value="2023 Day two, part 1 finished!" />
     <MESSAGE value="2023 Day two, part 2 finished!" />
     <MESSAGE value="Day 3, struggling with the data parsing!&#10;&#10;Attempted to use numpy and feel like I got distracted. But want to save that work here." />
@@ -396,7 +415,8 @@
     <MESSAGE value="Fixed a few bugs but still not passing the test." />
     <MESSAGE value="Still not getting the correct answer yet every test case I write passes...." />
     <MESSAGE value="Ugh. My &quot;magic&quot; nubmers were messed up. Switched to constants per hand and everything works. There is a lesson there kids." />
-    <option name="LAST_COMMIT_MESSAGE" value="Ugh. My &quot;magic&quot; nubmers were messed up. Switched to constants per hand and everything works. There is a lesson there kids." />
+    <MESSAGE value="Stop tracking input files." />
+    <option name="LAST_COMMIT_MESSAGE" value="Stop tracking input files." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
