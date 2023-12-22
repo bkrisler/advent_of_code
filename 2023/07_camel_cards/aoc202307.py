@@ -35,65 +35,73 @@ def find_type(hand):
     return 0
 
 
+FIVE_OF_A_KIND = 6
+FOUR_OF_A_KIND = 5
+FULL_HOUSE = 4
+THREE_OF_A_KIND = 3
+TWO_PAIR = 2
+ONE_PAIR = 1
+HIGH_CARD = 0
+
 def find_type_two(hand):
     res = Counter(hand)
     if 5 in res.values():
         # Five of a kind
-        result = 6
+        result = FIVE_OF_A_KIND
     elif 4 in res.values():
         # Four of a kind
-        if 'J' in hand: # and int(res['J']) == 4:
+        if 'J' in hand:  # and int(res['J']) == 4:
             # JJJJ2 == 22222
-            result = 6
-            #print("{} is now 5 of a kind. Type {}".format(hand, result))
+            result = FIVE_OF_A_KIND
+            # print("{} is now 5 of a kind. Type {}".format(hand, result))
         else:
-            result = 5
+            result = FOUR_OF_A_KIND
     elif 3 in res.values() and 2 in res.values():
         # Full house -- 3 of a kind and a pair
         if 'J' in hand:
             # It becomes 5 of a kind. KKKJJ (KKKKK) or JJJKK (KKKKK)
-            result = 6
-            #print("{} is now 5 of a kind. Type {}".format(hand, result))
+            result = FIVE_OF_A_KIND
+            # print("{} is now 5 of a kind. Type {}".format(hand, result))
         else:
-            result = 4
+            result = FULL_HOUSE
     elif 3 in res.values():
         # Three of a kind
         if 'J' in res.keys():
             # Options: KKKJA (KKKKA) or JJJKA (KKKKA). Becomes 4 of a kind.
-            result = 5
-            #print("{} is now 4 of a kind. Type {}".format(hand, result))
+            result = FOUR_OF_A_KIND
+            # print("{} is now 4 of a kind. Type {}".format(hand, result))
         else:
-            result = 3
+            result = THREE_OF_A_KIND
     elif len([x for x in res.values() if x == 2]) == 2:
         # Two Pair
         if 'J' in res.keys():
             # Options: JJAA3 (AAAA3) or AAKKJ (AAAKK)
             if int(res['J']) == 2:
                 # Becomes 4 of a kind
-                result = 5
-                #print("{} is now 4 of a kind. Type {}".format(hand, result))
+                result = FOUR_OF_A_KIND
+                # print("{} is now 4 of a kind. Type {}".format(hand, result))
             else:
                 # Becomes Full House
-                result = 4
-                #print("{} is now Full House. Type {}".format(hand, result))
+                result = FULL_HOUSE
+                # print("{} is now Full House. Type {}".format(hand, result))
         else:
-            result = 2
+            result = TWO_PAIR
     elif len([x for x in res.values() if x == 2]) == 1:
         # One Pair
         if 'J' in res.keys():
             # JJKAQ (AAAKQ) or AAKQJ (AAAKQ). Becomes 3 of a kind
-            result = 3
-            #print("{} is now 3 of a kind. Type {}".format(hand, result))
+            result = THREE_OF_A_KIND
+            # print("{} is now 3 of a kind. Type {}".format(hand, result))
         else:
-            result = 2
+            result = ONE_PAIR
     else:
         if 'J' in res.keys():
-            result = 2
+            result = ONE_PAIR
         else:
-            result = 1
-        #print("{} is now 1 pair. Type {}".format(hand, result))
+            result = HIGH_CARD
+        # print("{} is now 1 pair. Type {}".format(hand, result))
 
-    #print("{} is type: {}".format(hand, result))
+    # print("{} is type: {}".format(hand, result))
     return result
 
 
@@ -114,10 +122,10 @@ def second_order(hand1, hand2):
         for x in range(5):
             if hand1[x] != hand2[x]:
                 higher = get_higher(hand1[x], hand2[x])
-                result = 1if hand1[x] == higher else -1
+                result = 1 if hand1[x] == higher else -1
                 break
 
-    #print("Compare: {} with {} == {}".format(hand1, hand2, result))
+    # print("Compare: {} with {} == {}".format(hand1, hand2, result))
     return result
 
 
@@ -132,7 +140,7 @@ def second_order_p2(hand1, hand2):
                 result = 1 if hand1[x] == higher else -1
                 break
 
-    #print("Compare: {} with {} == {}".format(hand1, hand2, result))
+    # print("Compare: {} with {} == {}".format(hand1, hand2, result))
     return result
 
 
@@ -156,7 +164,7 @@ def part1(data):
     winnings = 0
     for idx, hand in enumerate(ranked, 1):
         bid = int(bids[hand]) * idx
-        #print("{} has rank {} and bid: {}".format(hand, idx, bid))
+        # print("{} has rank {} and bid: {}".format(hand, idx, bid))
         winnings += bid
 
     return winnings
@@ -169,6 +177,7 @@ def part2(data):
     Third Attempt:  250600944 -- Too High
     Fourth Attempt: 249541401 -- Incorrect
     Fifth Attempt:  249505671 -- Incorrect
+    Sixth Attempt:  250577259
     """
     hand = [x[0] for x in data]
     bids = dict(data)
@@ -177,7 +186,7 @@ def part2(data):
     print()
     for idx, hand in enumerate(ranked, 1):
         bid = int(bids[hand]) * idx
-        print("{} has rank {} and bid: {}".format(hand, idx, bid))
+        #print("{} has rank {} and bid: {}".format(hand, idx, bid))
         winnings += bid
 
     print()
