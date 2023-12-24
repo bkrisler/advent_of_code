@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="59f98ace-f199-4728-9ae5-c72622f91a4f" name="Changes" comment="Stop tracking input files.">
-      <change afterPath="$PROJECT_DIR$/2023/08_haunted_wasteland/aoc202308.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2023/08_haunted_wasteland/example1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2023/08_haunted_wasteland/example2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2023/08_haunted_wasteland/test_aoc202308.py" afterDir="false" />
+    <list default="true" id="59f98ace-f199-4728-9ae5-c72622f91a4f" name="Changes" comment="Day 8, Part one in the bag.">
+      <change afterPath="$PROJECT_DIR$/2023/08_haunted_wasteland/example3.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/download_input.py" beforeDir="false" afterPath="$PROJECT_DIR$/download_input.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2023/08_haunted_wasteland/aoc202308.py" beforeDir="false" afterPath="$PROJECT_DIR$/2023/08_haunted_wasteland/aoc202308.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2023/08_haunted_wasteland/test_aoc202308.py" beforeDir="false" afterPath="$PROJECT_DIR$/2023/08_haunted_wasteland/test_aoc202308.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,35 +32,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/Users/briankrisler/Desktop"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$USER_HOME$/Desktop" />
+    </key>
+  </component>
   <component name="RunManager" selected="Python.aoc202308">
-    <configuration name="aoc202307" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="advent_of_code" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2023/07_camel_cards" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2023/07_camel_cards/aoc202307.py" />
-      <option name="PARAMETERS" value="input.txt" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="aoc202308" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="advent_of_code" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -140,10 +123,24 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
+    <configuration name="Python tests for test_aoc202308.test_part2_example3" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="advent_of_code" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2023/08_haunted_wasteland" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_aoc202308.test_part2_example3&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Python.aoc202308" />
-      <item itemvalue="Python.aoc202307" />
       <item itemvalue="Python tests.Python tests for test_aoc202304.test_part1_example1" />
+      <item itemvalue="Python tests.Python tests for test_aoc202308.test_part2_example3" />
       <item itemvalue="Python tests.Python tests for test_aoc202308.test_parse_example1" />
       <item itemvalue="Python tests.Python tests for test_aoc202308.test_part1_example1" />
       <item itemvalue="Python tests.Python tests for test_aoc202308.test_part1_example2" />
@@ -151,10 +148,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.aoc202308" />
+        <item itemvalue="Python tests.Python tests for test_aoc202308.test_part2_example3" />
         <item itemvalue="Python tests.Python tests for test_aoc202308.test_part1_example2" />
         <item itemvalue="Python tests.Python tests for test_aoc202308.test_part1_example1" />
         <item itemvalue="Python tests.Python tests for test_aoc202308.test_parse_example1" />
-        <item itemvalue="Python.aoc202307" />
       </list>
     </recent_temporary>
   </component>
@@ -375,7 +372,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703247883916</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Day 8, Part one in the bag.">
+      <option name="closed" value="true" />
+      <created>1703254449883</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1703254449883</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -391,7 +396,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="2023 Day two, part 1 finished!" />
     <MESSAGE value="2023 Day two, part 2 finished!" />
     <MESSAGE value="Day 3, struggling with the data parsing!&#10;&#10;Attempted to use numpy and feel like I got distracted. But want to save that work here." />
     <MESSAGE value="Day 3, finally settled on a parsing solution. Had a few other stupid bugs but finally got it working!" />
@@ -416,7 +420,8 @@
     <MESSAGE value="Still not getting the correct answer yet every test case I write passes...." />
     <MESSAGE value="Ugh. My &quot;magic&quot; nubmers were messed up. Switched to constants per hand and everything works. There is a lesson there kids." />
     <MESSAGE value="Stop tracking input files." />
-    <option name="LAST_COMMIT_MESSAGE" value="Stop tracking input files." />
+    <MESSAGE value="Day 8, Part one in the bag." />
+    <option name="LAST_COMMIT_MESSAGE" value="Day 8, Part one in the bag." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -440,6 +445,16 @@
           <url>file://$PROJECT_DIR$/2023/04_scratchcards/test_aoc202304.py</url>
           <line>26</line>
           <option name="timeStamp" value="94" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/2023/08_haunted_wasteland/aoc202308.py</url>
+          <line>105</line>
+          <option name="timeStamp" value="123" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/2023/08_haunted_wasteland/aoc202308.py</url>
+          <line>102</line>
+          <option name="timeStamp" value="124" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
