@@ -20,12 +20,27 @@ def step_difference(row):
         history.append(np.diff(history[-1]))
 
     for x in reversed(range(len(history))):
-        if x == len(history)-1:
+        if x == len(history) - 1:
             history[x] = np.concatenate((history[x], [0]))
         else:
             history[x] = np.concatenate((history[x], [history[x+1][-1]+history[x][-1]]))
 
     return history[0][-1]
+
+
+def rev_step_difference(row):
+    history = [row]
+    while(np.sum(history[-1])) != 0:
+        history.append(np.diff(history[-1]))
+
+    for x in reversed(range(len(history))):
+        if x == len(history) - 1:
+            history[x] = np.concatenate((history[x], [0]))
+        else:
+            nv = [history[x][0] - history[x+1][0]]
+            history[x] = np.concatenate((nv, history[x]))
+
+    return history[0][0]
 
 
 def part1(data):
@@ -40,6 +55,12 @@ def part1(data):
 
 def part2(data):
     """Solve part 2."""
+    print()
+    result = 0
+    for row in data:
+        result += rev_step_difference(row)
+
+    return result
 
 
 def solve(puzzle_input):
