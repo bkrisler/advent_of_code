@@ -16,36 +16,6 @@ def parse_data(puzzle_input):
     return np.array(grid)
 
 
-NORTH_SOUTH = '|'
-EAST_WEST = '-'
-NORTH_EAST = 'L'
-NORTH_WEST = 'J'
-SOUTH_WEST = '7'
-SOUTH_EAST = 'F'
-START = 'S'
-
-
-def get_choices(type, pos, grid):
-    all_moves = list(itertools.product([-1, 0, 1], repeat=2))
-    all_moves.remove((0, 0))
-    choices = np.array(pos) + np.array(all_moves)
-    # Remove the impossible
-    choices = choices[((choices >= 0) & (choices <= 2)).all(axis=1)]
-
-    if type == START:
-        mask = np.array([[0, 1, 0],
-                         [1, 0, 1],
-                         [0, 1, 0]]).astype(bool)
-        res = grid[pos[0] - 1:pos[0] + 2, pos[1] - 1:pos[1] + 2][mask]
-        values = []
-        for choice in choices:
-            v = grid[choice[0]][choice[1]]
-            values.append(v)
-        print(choices)
-
-    return choices
-
-
 def get_moves(pos, sz):
     all_moves = list(itertools.product([-1, 0, 1], repeat=2))
     all_moves.remove((0, 0))
@@ -57,6 +27,14 @@ def get_moves(pos, sz):
     # Remove the impossible
     choices = choices[((choices >= 0) & (choices <= sz)).all(axis=1)]
     return tuple(map(tuple, choices))
+
+
+def get_neighbors(pos, sz):
+    n_idx = list(itertools.product([-1, 0, 1], repeat=2))
+    n_idx.remove((0, 0))
+    neighbors = np.array(pos) + np.array(n_idx)
+    neighbors = neighbors[((neighbors >= 0) & (neighbors <= sz)).all(axis=1)]
+    return tuple(map(tuple, neighbors))
 
 
 def get_value(p, grid):
@@ -105,7 +83,7 @@ def get_next(p, grid):
 
 
 def extract_path(grid):
-    start = np.where(grid == START)
+    start = np.where(grid == 'S')
     crnt = (start[0][0], start[1][0])
     result = defaultdict(list)
     children = get_next(crnt, grid)
@@ -127,18 +105,105 @@ def extract_path(grid):
 
         crnt = x
 
-    length = len(result.keys()) / 2.0
-    return length
+    return result
+
+
+def poly_area(fpath):
+    points = list(fpath.keys())
+    x = [p[0] for p in points]
+    y = [p[1] for p in points]
+    return 0.5 * np.abs(np.dot(x, np.roll(y, 1)) - np.dot(y, np.roll(x, 1)))
+
+
+def internal_points(area, edge_points):
+    return (2 * area - edge_points + 2) / 2
+
+
+def brute_find(fpath, sz):
+    all_points = list(fpath.keys())
+    grid = np.zeros(sz)
+    for p in all_points:
+        grid[p[0]][p[1]] = 1
+
+    # Trim empty rows and cols
+    mask = grid == 0
+    empty_rows = np.flatnonzero((~mask).sum(axis=1))
+    empty_cols = np.flatnonzero((~mask).sum(axis=0))
+    grid = grid[empty_rows.min():empty_rows.max()+1, empty_cols.min():empty_cols.max()+1]
+    ones = np.transpose(np.where(grid == 1))
+    # for point in ones:
+    #     neighbors = get_neighbors(point, sz)
+    #     for n in neighbors:
+    #         nn = (int(n[0]), int(n[1]))
+    #         try:
+    #             v = get_value(nn, grid)
+    #             if v == 0:
+    #                 grid[nn[0], nn[1]] = 2
+    #         except IndexError:
+    #             pass
+
+    np.savetxt('dump3.txt', grid.astype(int), fmt='%i', delimiter='')
+
+    contained = 0
+    for row in range(grid.shape[0]):
+        for col in range(grid.shape[1]):
+            if grid[row][col] == 0:
+                left = grid[0:col, row]
+                right = grid[col+1:, row]
+                top = grid[col, 0:row]
+                bottom = grid[col, row+1:]
+                if 1 in left and 1 in right and 1 in top and 1 in bottom:
+                    contained += 1
+                    print("{}, {} = {}".format(row, col, grid[row][col]))
+                #print("{} and {}".format(len(left), len(right)))
+
+    return contained
+
+    # twos = np.transpose(np.where(grid == 2))
+    # for point in twos:
+    #     neighbors = get_neighbors(point, sz)
+    #     for n in neighbors:
+    #         nn = (int(n[0]), int(n[1]))
+    #         try:
+    #             v = get_value(nn, grid)
+    #             if v == 0:
+    #                 grid[nn[0], nn[1]] = 3
+    #         except IndexError:
+    #             pass
+
+
+
+def visualize(fpath, sz):
+    all_points = list(fpath.keys())
+    grid = np.zeros((sz[0], sz[1]))
+    for p in all_points:
+        grid[p[0]][p[1]] = 1
+    print(grid.shape)
+    print()
+    mask = grid == 0
+    empty_rows = np.flatnonzero((~mask).sum(axis=1))
+    empty_cols = np.flatnonzero((~mask).sum(axis=0))
+    g2 = grid[empty_rows.min():empty_rows.max()+1, empty_cols.min():empty_cols.max()+1]
+    print(g2)
+
+    #print(g2.shape)
+    np.savetxt('dump.txt', grid.astype(int), fmt='%i', delimiter='')
 
 
 def part1(data):
     """Solve part 1."""
-    result = extract_path(data)
-    return int(result)
+    full_path = extract_path(data)
+    #visualize(full_path, data.shape)
+    return len(full_path.keys()) / 2.0
 
 
 def part2(data):
     """Solve part 2."""
+    full_path = extract_path(data)
+    area = poly_area(full_path)
+    result = internal_points(area, len(full_path.keys()))
+    return result
+
 
 
 def solve(puzzle_input):
