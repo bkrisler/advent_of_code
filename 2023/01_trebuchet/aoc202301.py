@@ -42,6 +42,7 @@ def process(line):
            'four': '4', 'five': '5', 'six': '6',
            'seven': '7', 'eight': '8', 'nine': '9'}
 
+    o_line = line
     pattern = r'(?=(one|two|three|four|five|six|seven|eight|nine))'
     matches = [(m.start(), m.group(1)) for m in re.finditer(pattern, line)]
     for match in matches:
@@ -49,13 +50,15 @@ def process(line):
 
     numbers = re.findall(r'\d', line)
 
+    print("{}, {} = {}".format(o_line, line, int(numbers[0] + numbers[-1])))
+    #print("{}".format(int(numbers[0] + numbers[-1])))
     return int(numbers[0] + numbers[-1])
 
 
 def solve(puzzle_input):
     """Solve the puzzle for the given input."""
-    data1 = parse_data_one(puzzle_input)
-    yield part1(data1)
+    #data1 = parse_data_one(puzzle_input)
+    #yield part1(data1)
     data2 = parse_data_two(puzzle_input)
     yield part2(data2)
 
