@@ -1,5 +1,4 @@
 """AoC 11, 2023: Cosmic Expansion."""
-import collections
 import itertools
 # Standard library imports
 import pathlib
@@ -56,6 +55,52 @@ def number_galaxies(x):
 
 def part2(data):
     """Solve part 2."""
+    d = np.asarray(data)
+    rows = np.where((d == '.').all(axis=1))[0]
+    cols = np.where((d == '.').all(axis=0))[0]
+
+    galaxies = number_galaxies(d)
+
+    multiplier = 1000000
+    multiplier = multiplier - 1
+
+    pairs = list(itertools.combinations(galaxies.keys(), 2))
+    result = 0
+    for pair in pairs:
+        start = list(galaxies[pair[0]])
+        end = list(galaxies[pair[1]])
+
+        srm = 0
+        erm = 0
+        for row in rows:
+            if start[0] < row < end[0]:
+                erm += multiplier
+            if row < start[0]:
+                srm += multiplier
+                if row < end[0]:
+                    erm += multiplier
+
+        start[0] += srm
+        end[0] += erm
+
+        scm = 0
+        ecm = 0
+        for col in cols:
+            if col < start[1]:
+                scm += multiplier
+                if col < end[1]:
+                    ecm += multiplier
+            elif start[1] < col < end[1]:
+                ecm += multiplier
+
+        start[1] += scm
+        end[1] += ecm
+
+        r = manhattan_distance(start, end)
+        #print("{} to {} is {}".format(start, end, r))
+        result += r
+
+    return result
 
 
 def solve(puzzle_input):
