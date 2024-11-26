@@ -54,9 +54,6 @@ def match(records, nums):
 
 def bf(records, nums):
     gen = ('#.' if r == '?' else r for r in records)
-    print("{} --> {}".format(records, list(gen)))
-    gen = ('#.' if r == '?' else r for r in records)
-    print("\t--> {}\n".format(list(itertools.product(*gen))))
     return sum(match(candidate, nums) for candidate in itertools.product(*gen))
 
 
@@ -72,6 +69,24 @@ def part1(data):
 
 def part2(data):
     """Solve part 2."""
+    result = 0
+    for row in data:
+        result1 = bf(row[0], row[1])
+        result2 = bf(row[0]+'?', row[1])
+        final = (result2 * 4) * result1
+        print()
+        # new_row = '' + row[0]
+        # new_nums = [x for x in row[1]]
+        #
+        # for x in range(5):
+        #     new_row += '?'
+        #     new_row += row[0]
+        #     for x in row[1]:
+        #         new_nums.append(x)
+        #
+        # result += bf(new_row, new_nums)
+
+    return result
 
 
 def solve(puzzle_input):
