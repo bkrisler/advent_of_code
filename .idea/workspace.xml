@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="59f98ace-f199-4728-9ae5-c72622f91a4f" name="Changes" comment="Day 1, Part 1. Works!">
+    <list default="true" id="59f98ace-f199-4728-9ae5-c72622f91a4f" name="Changes" comment="Day 1, Part 2. Works!">
+      <change afterPath="$PROJECT_DIR$/2024/02_red_nosed_reports/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/2024/02_red_nosed_reports/aoc202402.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/2024/02_red_nosed_reports/example1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/2024/02_red_nosed_reports/example2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/2024/02_red_nosed_reports/test_aoc202402.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2024/01_historian_hysteria/aoc202401.py" beforeDir="false" afterPath="$PROJECT_DIR$/2024/01_historian_hysteria/aoc202401.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,9 +38,12 @@
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "Python tests.Python tests for test_aoc202401.test_part1_example1.executor": "Run",
+    "Python tests.Python tests for test_aoc202402.test_parse_example1.executor": "Debug",
+    "Python tests.Python tests for test_aoc202402.test_part1_example1.executor": "Run",
     "Python tests.Python tests in test_aoc202401.py.executor": "Run",
     "Python.aoc202401.executor": "Debug",
     "Python.aoc202401.py input.txt.executor": "Run",
+    "Python.aoc202402.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -49,29 +56,7 @@
       <recent name="$USER_HOME$/Desktop" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.aoc202401">
-    <configuration name="aoc202312" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="advent_of_code" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2023/12_hot_springs" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2023/12_hot_springs/aoc202312.py" />
-      <option name="PARAMETERS" value="example1.txt" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.aoc202402">
     <configuration name="aoc202401" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="advent_of_code" />
       <option name="ENV_FILES" value="" />
@@ -86,6 +71,28 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2024/01_historian_hysteria/aoc202401.py" />
+      <option name="PARAMETERS" value="input.txt" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="aoc202402" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="advent_of_code" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2024/02_red_nosed_reports" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2024/02_red_nosed_reports/aoc202402.py" />
       <option name="PARAMETERS" value="input.txt" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -109,21 +116,6 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_aoc202312.test_part1_example1" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="advent_of_code" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2023/12_hot_springs" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_aoc202312.test_part1_example1&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
     <configuration name="Python tests for test_aoc202401.test_part1_example1" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="advent_of_code" />
       <option name="ENV_FILES" value="" />
@@ -139,36 +131,51 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests in test_aoc202401.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for test_aoc202402.test_parse_example1" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="advent_of_code" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2024/01_historian_hysteria" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2024/02_red_nosed_reports" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/2024/01_historian_hysteria/test_aoc202401.py&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <option name="_new_target" value="&quot;test_aoc202402.test_parse_example1&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_aoc202402.test_part1_example1" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="advent_of_code" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2024/02_red_nosed_reports" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_aoc202402.test_part1_example1&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.aoc202402" />
       <item itemvalue="Python.aoc202401" />
-      <item itemvalue="Python.aoc202312" />
       <item itemvalue="Python tests.Python tests for test_aoc202304.test_part1_example1" />
+      <item itemvalue="Python tests.Python tests for test_aoc202402.test_parse_example1" />
+      <item itemvalue="Python tests.Python tests for test_aoc202402.test_part1_example1" />
       <item itemvalue="Python tests.Python tests for test_aoc202401.test_part1_example1" />
-      <item itemvalue="Python tests.Python tests in test_aoc202401.py" />
-      <item itemvalue="Python tests.Python tests for test_aoc202312.test_part1_example1" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.aoc202402" />
+        <item itemvalue="Python tests.Python tests for test_aoc202402.test_part1_example1" />
+        <item itemvalue="Python tests.Python tests for test_aoc202402.test_parse_example1" />
         <item itemvalue="Python.aoc202401" />
         <item itemvalue="Python tests.Python tests for test_aoc202401.test_part1_example1" />
-        <item itemvalue="Python tests.Python tests in test_aoc202401.py" />
-        <item itemvalue="Python.aoc202312" />
-        <item itemvalue="Python tests.Python tests for test_aoc202312.test_part1_example1" />
       </list>
     </recent_temporary>
   </component>
@@ -476,7 +483,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733107907122</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Day 1, Part 2. Works!">
+      <option name="closed" value="true" />
+      <created>1733108143342</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1733108143342</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -492,7 +507,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Day 5 part one. Finished." />
     <MESSAGE value="Part 2 is taking hours. Something is off on the approach. This attempt used processes, but backing that out." />
     <MESSAGE value="Part 2 now works for the example data but fails for the full data set. Getting closer." />
     <MESSAGE value="Switch to using classes to prevent stupid errors" />
@@ -517,7 +531,8 @@
     <MESSAGE value="Day 11, Part 2. Done." />
     <MESSAGE value="Day 12, Part 1. Accidentially saw a solution that I could not unsee." />
     <MESSAGE value="Day 1, Part 1. Works!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Day 1, Part 1. Works!" />
+    <MESSAGE value="Day 1, Part 2. Works!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Day 1, Part 2. Works!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -546,11 +561,6 @@
           <url>file://$PROJECT_DIR$/2023/12_hot_springs/aoc202312.py</url>
           <line>76</line>
           <option name="timeStamp" value="271" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/2024/01_historian_hysteria/aoc202401.py</url>
-          <line>31</line>
-          <option name="timeStamp" value="280" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
