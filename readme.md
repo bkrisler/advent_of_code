@@ -4,7 +4,7 @@
 Use `copier` to invoke the Python template and set up files for a new solution:
 
 ```console
-$ copier gh:gahjelle/template-aoc-python .
+$ copier copy --trust gh:gahjelle/template-aoc-python .
 ```
 
 Answer the questions and allow the hook to download your personal input.
