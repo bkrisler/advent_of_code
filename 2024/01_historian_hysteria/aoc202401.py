@@ -23,7 +23,13 @@ def part1(data):
 
 def part2(data):
     """Solve part 2."""
-
+    col1 = sorted(data[0])
+    col2 = sorted(data[1])
+    result = []
+    for idx, c in enumerate(col1):
+        x = col2.count(c)
+        result.append(c*x)
+    return sum(result)
 
 def solve(puzzle_input):
     """Solve the puzzle for the given input."""
