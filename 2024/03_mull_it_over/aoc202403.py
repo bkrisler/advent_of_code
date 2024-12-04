@@ -8,19 +8,13 @@ import sys
 
 def parse_data(puzzle_input):
     """Parse input."""
-    p = re.compile("mul\(\d{1,3},\d{1,3}\)")
-    result = p.findall(puzzle_input)
-    return result
+    return puzzle_input
 
 
 def part1(data):
     """Solve part 1."""
     p = re.compile("mul\((\d{1,3}),(\d{1,3})\)")
-    result = 0
-    for r in data:
-        m = p.match(r)
-        result += int(m.group(1)) * int(m.group(2))
-    return result
+    return sum([int(r[0]) * int(r[1]) for r in p.findall(data)])
 
 def part2(data):
     """Solve part 2."""
