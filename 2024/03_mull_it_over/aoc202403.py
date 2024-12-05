@@ -16,9 +16,26 @@ def part1(data):
     p = re.compile("mul\((\d{1,3}),(\d{1,3})\)")
     return sum([int(r[0]) * int(r[1]) for r in p.findall(data)])
 
+def sum_multipliers(line):
+    p = re.compile("mul\((\d{1,3}),(\d{1,3})\)")
+    return sum([int(r[0]) * int(r[1]) for r in p.findall(line)])
+
 def part2(data):
     """Solve part 2."""
+    parts = data.split("don't")
+    if len(parts) == 0:
+        return 0
 
+    total = sum_multipliers(parts[0])
+    for part in parts[1:]:
+        sub_parts = part.split('do()')
+        if len(sub_parts) == 1:
+            continue
+        else:
+            for sp in sub_parts[1:]:
+                total += sum_multipliers(sp)
+
+    return total
 
 def solve(puzzle_input):
     """Solve the puzzle for the given input."""
