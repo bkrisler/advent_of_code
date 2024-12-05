@@ -77,9 +77,38 @@ def part1(data):
     return count
 
 
+def find_mas(grid, pt, mask):
+    result = []
+    for point in mask:
+        val, _ = get_val(grid, pt, point[0])
+        if val is not None:
+            result.append(val == point[1])
+        else:
+            result.append(False)
+    return all(result)
+
+
+
 def part2(data):
     """Solve part 2."""
+    mask1 = [[(-1, -1), 'M'], [(-1, 1), 'M'], [(1, -1), 'S'], [(1, 1), 'S']]
+    mask2 = [[(-1, -1), 'S'], [(-1, 1), 'S'], [(1, -1), 'M'], [(1, 1), 'M']]
+    mask3 = [[(-1, -1), 'M'], [(-1, 1), 'S'], [(1, -1), 'M'], [(1, 1), 'S']]
+    mask4 = [[(-1, -1), 'S'], [(-1, 1), 'M'], [(1, -1), 'S'], [(1, 1), 'M']]
+    count = 0
+    for r_idx, row in enumerate(data):
+        for c_idx, value in enumerate(row):
+            if value == 'A':
+                if find_mas(data, (r_idx, c_idx), mask1):
+                    count += 1
+                elif find_mas(data, (r_idx, c_idx), mask2):
+                    count += 1
+                elif find_mas(data, (r_idx, c_idx), mask3):
+                    count += 1
+                elif find_mas(data, (r_idx, c_idx), mask4):
+                    count += 1
 
+    return count
 
 def solve(puzzle_input):
     """Solve the puzzle for the given input."""
