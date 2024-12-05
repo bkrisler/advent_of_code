@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="59f98ace-f199-4728-9ae5-c72622f91a4f" name="Changes" comment="Changed up 1 to stage for part 2">
+    <list default="true" id="59f98ace-f199-4728-9ae5-c72622f91a4f" name="Changes" comment="Day 3, Part 2 done.">
+      <change afterPath="$PROJECT_DIR$/2024/04_ceres_search/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/2024/04_ceres_search/aoc202404.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/2024/04_ceres_search/example1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/2024/04_ceres_search/example2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/2024/04_ceres_search/test_aoc202404.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2024/03_mull_it_over/aoc202403.py" beforeDir="false" afterPath="$PROJECT_DIR$/2024/03_mull_it_over/aoc202403.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2024/03_mull_it_over/test_aoc202403.py" beforeDir="false" afterPath="$PROJECT_DIR$/2024/03_mull_it_over/test_aoc202403.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,11 +44,14 @@
     "Python tests.Python tests for test_aoc202403.test_parse_example1.executor": "Debug",
     "Python tests.Python tests for test_aoc202403.test_part1_example1.executor": "Run",
     "Python tests.Python tests for test_aoc202403.test_part2_example2.executor": "Debug",
+    "Python tests.Python tests for test_aoc202404.test_parse_example1.executor": "Run",
+    "Python tests.Python tests for test_aoc202404.test_part1_example1.executor": "Run",
     "Python tests.Python tests in test_aoc202401.py.executor": "Run",
     "Python.aoc202401.executor": "Debug",
     "Python.aoc202401.py input.txt.executor": "Run",
     "Python.aoc202402.executor": "Run",
     "Python.aoc202403.executor": "Run",
+    "Python.aoc202404.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -58,29 +64,7 @@
       <recent name="$USER_HOME$/Desktop" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.aoc202403">
-    <configuration name="aoc202402" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="advent_of_code" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2024/02_red_nosed_reports" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2024/02_red_nosed_reports/aoc202402.py" />
-      <option name="PARAMETERS" value="input.txt" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.aoc202404">
     <configuration name="aoc202403" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="advent_of_code" />
       <option name="ENV_FILES" value="" />
@@ -95,6 +79,28 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2024/03_mull_it_over/aoc202403.py" />
+      <option name="PARAMETERS" value="input.txt" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="aoc202404" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="advent_of_code" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2024/04_ceres_search" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2024/04_ceres_search/aoc202404.py" />
       <option name="PARAMETERS" value="input.txt" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -118,36 +124,6 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_aoc202403.test_parse_example1" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="advent_of_code" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2024/03_mull_it_over" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_aoc202403.test_parse_example1&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Python tests for test_aoc202403.test_part1_example1" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="advent_of_code" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2024/03_mull_it_over" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_aoc202403.test_part1_example1&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
     <configuration name="Python tests for test_aoc202403.test_part2_example2" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="advent_of_code" />
       <option name="ENV_FILES" value="" />
@@ -163,21 +139,51 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
+    <configuration name="Python tests for test_aoc202404.test_parse_example1" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="advent_of_code" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2024/04_ceres_search" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_aoc202404.test_parse_example1&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_aoc202404.test_part1_example1" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="advent_of_code" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2024/04_ceres_search" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_aoc202404.test_part1_example1&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
     <list>
+      <item itemvalue="Python.aoc202404" />
       <item itemvalue="Python.aoc202403" />
-      <item itemvalue="Python.aoc202402" />
       <item itemvalue="Python tests.Python tests for test_aoc202304.test_part1_example1" />
       <item itemvalue="Python tests.Python tests for test_aoc202403.test_part2_example2" />
-      <item itemvalue="Python tests.Python tests for test_aoc202403.test_parse_example1" />
-      <item itemvalue="Python tests.Python tests for test_aoc202403.test_part1_example1" />
+      <item itemvalue="Python tests.Python tests for test_aoc202404.test_parse_example1" />
+      <item itemvalue="Python tests.Python tests for test_aoc202404.test_part1_example1" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.aoc202404" />
+        <item itemvalue="Python tests.Python tests for test_aoc202404.test_part1_example1" />
+        <item itemvalue="Python tests.Python tests for test_aoc202404.test_parse_example1" />
         <item itemvalue="Python.aoc202403" />
         <item itemvalue="Python tests.Python tests for test_aoc202403.test_part2_example2" />
-        <item itemvalue="Python tests.Python tests for test_aoc202403.test_part1_example1" />
-        <item itemvalue="Python tests.Python tests for test_aoc202403.test_parse_example1" />
-        <item itemvalue="Python.aoc202402" />
       </list>
     </recent_temporary>
   </component>
@@ -525,7 +531,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733282428665</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Day 3, Part 2 done.">
+      <option name="closed" value="true" />
+      <created>1733360982310</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1733360982310</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -541,7 +555,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Yet anothe approach." />
     <MESSAGE value="Cleaner solution?" />
     <MESSAGE value="Finally solved Day 6, Part 2." />
     <MESSAGE value="Finished part one of Day 6" />
@@ -566,7 +579,8 @@
     <MESSAGE value="Day 2, Part 2. Works!&#10;&#10;Got caught up overthinking that one for a bit." />
     <MESSAGE value="Day 3, Part 1. Works!" />
     <MESSAGE value="Changed up 1 to stage for part 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed up 1 to stage for part 2" />
+    <MESSAGE value="Day 3, Part 2 done." />
+    <option name="LAST_COMMIT_MESSAGE" value="Day 3, Part 2 done." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
