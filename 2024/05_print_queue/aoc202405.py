@@ -50,6 +50,15 @@ def part1(data):
 
 def part2(data):
     """Solve part 2."""
+    print()
+    total = 0
+    for row in data:
+        sorted_pages = sorted(row, key=functools.cmp_to_key(compare))
+        if row != sorted_pages:
+            middle = math.ceil(len(sorted_pages)/2) - 1
+            total += int(sorted_pages[middle])
+
+    return total
 
 
 def solve(puzzle_input):
