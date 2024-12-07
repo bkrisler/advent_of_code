@@ -7,11 +7,15 @@ from collections import defaultdict
 from enum import Enum
 import re
 
+import numpy as np
+import matplotlib.pyplot as plt
+
 class Direction(Enum):
     UP = '^'
     DOWN = 'v'
     RIGHT = '>'
     LEFT = '<'
+
 
 class Point(object):
     def __init__(self, row, col):
@@ -40,22 +44,39 @@ class Point(object):
     def __eq__(self, other):
         return self.row == other.row and self.col == other.col
 
+
 class Guard(object):
     def __init__(self, direction, pos):
         self.direction = direction
         self.pos = pos
         self.goal = None
         self.done = False
+        self.history = []
 
     @property
     def row(self):
         return self.pos.row
 
-
     @property
     def col(self):
         return self.pos.col
 
+    def move(self, data):
+        if self.direction == Direction.UP:
+            self.history.append(move_up(data, self))
+        elif self.direction == Direction.DOWN:
+            self.history.append(move_down(data, self))
+        elif self.direction == Direction.RIGHT:
+            self.history.append(move_right(data, self))
+        elif self.direction == Direction.LEFT:
+            self.history.append(move_left(data, self))
+
+        self.update()
+
+    def update(self):
+        self.pos = self.goal
+        self.goal = None
+        self.turn()
 
     def turn(self):
         if self.direction == Direction.UP:
@@ -69,6 +90,7 @@ class Guard(object):
 
     def __str__(self):
         return f'Guard(point={self.pos}, direction-{self.direction}, goal={self.goal})'
+
 
 def parse_data(puzzle_input):
     """Parse input."""
@@ -100,14 +122,11 @@ def move_up(data, guard):
         guard.done = True
     else:
         row_list = [x.row for x in obstacles]
-        closest = min(row_list, key = lambda x: abs(x - guard.row))
+        closest = min(row_list, key=lambda x: abs(x - guard.row))
         obstacle = [x for x in obstacles if x.row == closest][0]
-        guard.goal = Point(obstacle.row+1, guard.col)
+        guard.goal = Point(obstacle.row + 1, guard.col)
 
-    visited = [Point(x, guard.pos.col) for x in range(guard.pos.row - 1, guard.goal.row-1, -1)]
-    guard.pos = guard.goal
-    guard.goal = None
-    guard.turn()
+    visited = [Point(x, guard.pos.col) for x in range(guard.pos.row - 1, guard.goal.row - 1, -1)]
     return visited
 
 
@@ -118,14 +137,11 @@ def move_down(data, guard):
         guard.done = True
     else:
         row_list = [x.row for x in obstacles]
-        closest = min(row_list, key = lambda x: abs(x - guard.row))
+        closest = min(row_list, key=lambda x: abs(x - guard.row))
         obstacle = [x for x in obstacles if x.row == closest][0]
-        guard.goal = Point(obstacle.row-1, guard.col)
+        guard.goal = Point(obstacle.row - 1, guard.col)
 
-    visited = [Point(x, guard.pos.col) for x in range(guard.pos.row+1, guard.goal.row+1)]
-    guard.pos = guard.goal
-    guard.goal = None
-    guard.turn()
+    visited = [Point(x, guard.pos.col) for x in range(guard.pos.row + 1, guard.goal.row + 1)]
     return visited
 
 
@@ -136,15 +152,13 @@ def move_right(data, guard):
         guard.done = True
     else:
         col_list = [x.col for x in obstacles]
-        closest = min(col_list, key = lambda x: abs(x - guard.col))
+        closest = min(col_list, key=lambda x: abs(x - guard.col))
         obstacle = [x for x in obstacles if x.col == closest][0]
-        guard.goal = Point(guard.row, obstacle.col-1)
+        guard.goal = Point(guard.row, obstacle.col - 1)
 
-    visited = [Point(guard.pos.row, x) for x in range(guard.pos.col+1, guard.goal.col+1)]
-    guard.pos = guard.goal
-    guard.goal = None
-    guard.turn()
+    visited = [Point(guard.pos.row, x) for x in range(guard.pos.col + 1, guard.goal.col + 1)]
     return visited
+
 
 def move_left(data, guard):
     obstacles = [o for o in data.get('#') if o.row == guard.row and o.col < guard.col]
@@ -153,55 +167,53 @@ def move_left(data, guard):
         guard.done = True
     else:
         col_list = [x.col for x in obstacles]
-        closest = min(col_list, key = lambda x: abs(x - guard.col))
+        closest = min(col_list, key=lambda x: abs(x - guard.col))
         obstacle = [x for x in obstacles if x.col == closest][0]
         guard.goal = Point(guard.row, obstacle.col + 1)
 
-    visited = [Point(guard.pos.row, x) for x in range(guard.pos.col-1, guard.goal.col-1, -1)]
-    guard.pos = guard.goal
-    guard.goal = None
-    guard.turn()
+    visited = [Point(guard.pos.row, x) for x in range(guard.pos.col - 1, guard.goal.col - 1, -1)]
     return visited
 
 
-def next_obstacle(guard, data):
-    visited_locations = []
-    new_pos = None
-    if guard.direction == Direction.UP:
-        visited = move_up(data, guard)
-        visited_locations.extend(visited)
-        #print(f"Moved up {len(visited)} positions from {visited[0]} to {visited[-1]}")
-    elif guard.direction == Direction.DOWN:
-        visited = move_down(data, guard)
-        visited_locations.extend(visited)
-        #print(f"Moved down {len(visited)} positions from {visited[0]} to {visited[-1]}")
-    elif guard.direction == Direction.LEFT:
-        visited = move_left(data, guard)
-        visited_locations.extend(visited)
-        #print(f"Moved left {len(visited)} positions from {visited[0]} to {visited[-1]}")
-    elif guard.direction == Direction.RIGHT:
-        visited = move_right(data, guard)
-        visited_locations.extend(visited)
-        #print(f"Moved right {len(visited)} positions from {visited[0]} to {visited[-1]}")
+def display(data, history):
+    size = data.get('size')[0]
+    grid = np.zeros(size)
 
-    return visited_locations
+    fig, ax = plt.subplots(figsize=(10,10))
+    ax.imshow(grid, cmap=plt.cm.terrain)
+    line, = ax.plot([],[], color="black")
+    plt.ion()
+    plt.show()
+    for o in data.get('#'):
+        plt.gcf().canvas.draw()
+        line, = ax.plot(o.row, o.col, '.', c='black')
+        #plt.pause(0.1)
+    for record in history:
+        for point in record:
+            plt.gcf().canvas.draw()
+            line, = ax.plot(point.row, point.col, '.', c='red')
+            plt.pause(0.1)
 
 
 def part1(data):
     """Solve part 1."""
-    print()
     visited_locations = []
     guard = data['guard'][0]
+    guard.history.append([guard.pos])
     while not guard.done:
-        visited = next_obstacle(guard, data)
-        for v in visited:
-            if v not in visited_locations:
-                visited_locations.append(v)
+        guard.move(data)
+
+    for visited in guard.history:
+        for pos in visited:
+            if pos not in visited_locations:
+                visited_locations.append(pos)
 
     return len(visited_locations)
 
+
 def part2(data):
     """Solve part 2."""
+
 
 def solve(puzzle_input):
     """Solve the puzzle for the given input."""
