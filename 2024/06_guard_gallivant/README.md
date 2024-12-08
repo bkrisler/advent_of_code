@@ -5,4 +5,4 @@
 See https://adventofcode.com/2024/day/6
 
 
-5144 is too low.
+Part 2, 833 is too low.

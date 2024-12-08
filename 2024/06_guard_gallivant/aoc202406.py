@@ -3,22 +3,30 @@
 # Standard library imports
 import pathlib
 import sys
+import typing
 from collections import defaultdict
 from enum import Enum
 import re
 
-import numpy as np
-import matplotlib.pyplot as plt
 
 class Direction(Enum):
-    UP = '^'
-    DOWN = 'v'
-    RIGHT = '>'
-    LEFT = '<'
+    UP = ('^', lambda p: Point(p.row - 1, p.col))
+    DOWN = ('v', lambda p: Point(p.row + 1, p.col))
+    RIGHT = ('>', lambda p: Point(p.row, p.col + 1))
+    LEFT = ('<', lambda p: Point(p.row, p.col - 1))
 
+    def __init__(self, key, f):
+        self.key = key
+        self.f = f
+
+    def next(self, pt):
+        return self.f(pt)
+
+    def __str__(self):
+        return f'{self.key}'
 
 class Point(object):
-    def __init__(self, row, col):
+    def __init__(self, row: int, col: int):
         self._row = row
         self._col = col
 
@@ -39,19 +47,28 @@ class Point(object):
         self._col = col
 
     def __str__(self):
-        return f'Point({self.row}, {self.col})'
+        return f'Point(row={self._row}, col={self._col})'
 
     def __eq__(self, other):
         return self.row == other.row and self.col == other.col
 
 
+class Visited(object):
+    def __init__(self, pos, direction):
+        self.pos = pos
+        self.direction = direction
+
+    def __str__(self):
+        return f'Visited(pos={self.pos}, dir={self.direction.key})'
+
 class Guard(object):
-    def __init__(self, direction, pos):
+    def __init__(self, direction: Direction, pos: Point):
         self.direction = direction
         self.pos = pos
         self.goal = None
         self.done = False
         self.history = []
+        self.safe_blocks = []
 
     @property
     def row(self):
@@ -61,22 +78,79 @@ class Guard(object):
     def col(self):
         return self.pos.col
 
-    def move(self, data):
+    def move(self, data: typing.Dict, loop_check: bool=False):
+        grid_size = data.get('size')[0]
+        new_pos = self.direction.next(self.pos)
+        if new_pos.row >= 0 and new_pos.col >= 0 and new_pos.row < grid_size[0] and new_pos.row < grid_size[1]:
+            if new_pos in data.get('#'):
+                self.turn()
+            else:
+                self.history.append(Visited(self.pos, self.direction))
+                self.pos = new_pos
+                if loop_check:
+                    self.check_loop(data.get('#'))
+
+        else:
+            self.history.append(Visited(self.pos, self.direction))
+            self.done = True
+
+    def check_loop(self, blockers):
         if self.direction == Direction.UP:
-            self.history.append(move_up(data, self))
-        elif self.direction == Direction.DOWN:
-            self.history.append(move_down(data, self))
+            row_history = [v for v in self.history if v.pos.row == self.row
+                           and (v.direction == Direction.RIGHT or v.direction == Direction.LEFT) ]
+            if len(row_history) > 0:
+                one_right = Point(self.row, self.col + 1)
+                if one_right in [v.pos for v in row_history]:
+                    self.safe_blocks.append(Point(self.row - 1, self.col))
+                else:
+                    row_blocks = [b for b in blockers if b.row == self.row]
+                    blocker = [b for b in row_blocks if b.row < self.row]
+                    if len(blocker) > 0:
+                        visited_cols = [x.pos.col for x in row_history]
+                        if self.col > max(visited_cols):
+                            self.safe_blocks.append(Point(self.row - 1, self.col))
         elif self.direction == Direction.RIGHT:
-            self.history.append(move_right(data, self))
+            col_history = [v for v in self.history if v.pos.col == self.col
+                           and (v.direction == Direction.UP or v.direction == Direction.DOWN)]
+            if len(col_history) > 0:
+                one_down = Point(self.row + 1, self.col)
+                if one_down in [v.pos for v in col_history]:
+                    self.safe_blocks.append(Point(self.row, self.col + 1))
+                else:
+                    col_blocks = [b for b in blockers if b.col == self.col]
+                    blocker = [b for b in col_blocks if b.row > self.row]
+                    if len(blocker) > 0:
+                        visited_rows = [x.pos.row for x in col_history]
+                        if self.row < min(visited_rows):
+                            self.safe_blocks.append(Point(self.row, self.col + 1))
+        elif self.direction == Direction.DOWN:
+            row_history = [v for v in self.history if v.pos.row == self.row
+                           and (v.direction == Direction.RIGHT or v.direction == Direction.LEFT) ]
+            if len(row_history) > 0:
+                one_left = Point(self.row, self.col - 1)
+                if one_left in [v.pos for v in row_history]:
+                    self.safe_blocks.append(Point(self.row + 1, self.col))
+                else:
+                    row_blocks = [b for b in blockers if b.row == self.row]
+                    blocker = [b for b in row_blocks if b.row < self.row]
+                    if len(blocker) > 0:
+                        visited_cols = [x.pos.col for x in row_history]
+                        if self.col < min(visited_cols):
+                            self.safe_blocks.append(Point(self.row + 1, self.col))
         elif self.direction == Direction.LEFT:
-            self.history.append(move_left(data, self))
-
-        self.update()
-
-    def update(self):
-        self.pos = self.goal
-        self.goal = None
-        self.turn()
+            col_history = [v for v in self.history if v.pos.col == self.col
+                           and (v.direction == Direction.UP or v.direction == Direction.DOWN)]
+            if len(col_history) > 0:
+                one_up = Point(self.row - 1, self.col)
+                if one_up in [v.pos for v in col_history]:
+                    self.safe_blocks.append(Point(self.row, self.col - 1))
+                else:
+                    col_blocks = [b for b in blockers if b.col == self.col]
+                    blocker = [b for b in col_blocks if b.row < self.row]
+                    if len(blocker) > 0:
+                        visited_rows = [x.pos.row for x in col_history]
+                        if self.row > max(visited_rows):
+                            self.safe_blocks.append(Point(self.row, self.col + 1))
 
     def turn(self):
         if self.direction == Direction.UP:
@@ -89,7 +163,7 @@ class Guard(object):
             self.direction = Direction.UP
 
     def __str__(self):
-        return f'Guard(point={self.pos}, direction-{self.direction}, goal={self.goal})'
+        return f'Guard(point={self.pos}, direction={self.direction})'
 
 
 def parse_data(puzzle_input):
@@ -115,104 +189,75 @@ def parse_data(puzzle_input):
     return blocks
 
 
-def move_up(data, guard):
-    obstacles = [o for o in data.get('#') if o.col == guard.col and o.row <= guard.row]
-    if len(obstacles) == 0:
-        guard.goal = Point(0, guard.col)
-        guard.done = True
-    else:
-        row_list = [x.row for x in obstacles]
-        closest = min(row_list, key=lambda x: abs(x - guard.row))
-        obstacle = [x for x in obstacles if x.row == closest][0]
-        guard.goal = Point(obstacle.row + 1, guard.col)
+def path_right(history: typing.List, point: Point) -> bool:
+    target_row = point.row
+    for visited in history:
+        for pos in visited:
+            if pos.row == target_row and pos.col > point.col:
+                return True
 
-    visited = [Point(x, guard.pos.col) for x in range(guard.pos.row - 1, guard.goal.row - 1, -1)]
-    return visited
+    return False
 
+def path_left(history: typing.List, point: Point) -> bool:
+    target_row = point.row
+    for visited in history:
+        for pos in visited:
+            if pos.row == target_row and pos.col < point.col:
+                return True
 
-def move_down(data, guard):
-    obstacles = [o for o in data.get('#') if o.col == guard.col and o.row > guard.row]
-    if len(obstacles) == 0:
-        guard.goal = Point(data.get('size')[0][0] - 1, guard.col)
-        guard.done = True
-    else:
-        row_list = [x.row for x in obstacles]
-        closest = min(row_list, key=lambda x: abs(x - guard.row))
-        obstacle = [x for x in obstacles if x.row == closest][0]
-        guard.goal = Point(obstacle.row - 1, guard.col)
+    return False
 
-    visited = [Point(x, guard.pos.col) for x in range(guard.pos.row + 1, guard.goal.row + 1)]
-    return visited
+def path_up(history: typing.List, point: Point) -> bool:
+    target_col = point.col
+    for visited in history:
+        for pos in visited:
+            if pos.col == target_col and pos.col < point.col:
+                return True
 
+    return False
 
-def move_right(data, guard):
-    obstacles = [o for o in data.get('#') if o.row == guard.row and o.col > guard.col]
-    if len(obstacles) == 0:
-        guard.goal = Point(guard.row, data.get('size')[0][1] - 1)
-        guard.done = True
-    else:
-        col_list = [x.col for x in obstacles]
-        closest = min(col_list, key=lambda x: abs(x - guard.col))
-        obstacle = [x for x in obstacles if x.col == closest][0]
-        guard.goal = Point(guard.row, obstacle.col - 1)
+def path_down(history: typing.List, point: Point) -> bool:
+    target_col = point.col
+    for visited in history:
+        for pos in visited:
+            if pos.col == target_col and pos.col > point.col:
+                return True
 
-    visited = [Point(guard.pos.row, x) for x in range(guard.pos.col + 1, guard.goal.col + 1)]
-    return visited
+    return False
 
+def check_history(guard: Guard, visited: typing.List, direction: Direction):
+    for point in visited:
+        print(f"Point: {point} and Guard: {guard.pos}")
+        if guard.pos.row == point.row and guard.pos.col == point.col:
+            print("HERE")
+    print("Not Here")
 
-def move_left(data, guard):
-    obstacles = [o for o in data.get('#') if o.row == guard.row and o.col < guard.col]
-    if len(obstacles) == 0:
-        guard.goal = Point(guard.row, 0)
-        guard.done = True
-    else:
-        col_list = [x.col for x in obstacles]
-        closest = min(col_list, key=lambda x: abs(x - guard.col))
-        obstacle = [x for x in obstacles if x.col == closest][0]
-        guard.goal = Point(guard.row, obstacle.col + 1)
-
-    visited = [Point(guard.pos.row, x) for x in range(guard.pos.col - 1, guard.goal.col - 1, -1)]
-    return visited
-
-
-def display(data, history):
-    size = data.get('size')[0]
-    grid = np.zeros(size)
-
-    fig, ax = plt.subplots(figsize=(10,10))
-    ax.imshow(grid, cmap=plt.cm.terrain)
-    line, = ax.plot([],[], color="black")
-    plt.ion()
-    plt.show()
-    for o in data.get('#'):
-        plt.gcf().canvas.draw()
-        line, = ax.plot(o.row, o.col, '.', c='black')
-        #plt.pause(0.1)
-    for record in history:
-        for point in record:
-            plt.gcf().canvas.draw()
-            line, = ax.plot(point.row, point.col, '.', c='red')
-            plt.pause(0.1)
+    return None
 
 
 def part1(data):
     """Solve part 1."""
-    visited_locations = []
     guard = data['guard'][0]
-    guard.history.append([guard.pos])
     while not guard.done:
-        guard.move(data)
+        guard.move(data, loop_check=True)
 
+    unique_visited = []
     for visited in guard.history:
-        for pos in visited:
-            if pos not in visited_locations:
-                visited_locations.append(pos)
+        if visited.pos not in unique_visited:
+            unique_visited.append(visited.pos)
 
-    return len(visited_locations)
+    return len(unique_visited)
 
 
 def part2(data):
     """Solve part 2."""
+    print()
+
+    guard = data['guard'][0]
+    while not guard.done:
+        guard.move(data, loop_check=True)
+
+    return len(guard.safe_blocks)
 
 
 def solve(puzzle_input):

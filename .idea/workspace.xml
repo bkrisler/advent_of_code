@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="59f98ace-f199-4728-9ae5-c72622f91a4f" name="Changes" comment="Day 6, part 1.&#10;  - Tests pass&#10;  - submit failed with a 5144 too low.">
-      <change afterPath="$PROJECT_DIR$/2024/06_guard_gallivant/example3.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2024/06_guard_gallivant/example4.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2024/06_guard_gallivant/example5.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2024/06_guard_gallivant/example6.txt" afterDir="false" />
+    <list default="true" id="59f98ace-f199-4728-9ae5-c72622f91a4f" name="Changes" comment="Day 6, part 1. Works.&#10;&#10;Wasted too much time because I didn't fully read the rules.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2024/06_guard_gallivant/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/2024/06_guard_gallivant/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/2024/06_guard_gallivant/aoc202406.py" beforeDir="false" afterPath="$PROJECT_DIR$/2024/06_guard_gallivant/aoc202406.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/2024/06_guard_gallivant/test_aoc202406.py" beforeDir="false" afterPath="$PROJECT_DIR$/2024/06_guard_gallivant/test_aoc202406.py" afterDir="false" />
     </list>
@@ -64,6 +61,7 @@
     "Python tests.Python tests for test_aoc202406.test_part1_example4.executor": "Run",
     "Python tests.Python tests for test_aoc202406.test_part1_example5.executor": "Run",
     "Python tests.Python tests for test_aoc202406.test_part1_example6.executor": "Run",
+    "Python tests.Python tests for test_aoc202406.test_part2_example1.executor": "Run",
     "Python tests.Python tests in test_aoc202401.py.executor": "Run",
     "Python tests.Python tests in test_aoc202406.py.executor": "Run",
     "Python.aoc202401.executor": "Debug",
@@ -124,6 +122,21 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
+    <configuration name="Python tests for test_aoc202406.test_part1_example1" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="advent_of_code" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2024/06_guard_gallivant" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_aoc202406.test_part1_example1&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
     <configuration name="Python tests for test_aoc202406.test_part1_example3" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="advent_of_code" />
       <option name="ENV_FILES" value="" />
@@ -136,36 +149,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;test_aoc202406.test_part1_example3&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Python tests for test_aoc202406.test_part1_example4" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="advent_of_code" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2024/06_guard_gallivant" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_aoc202406.test_part1_example4&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Python tests for test_aoc202406.test_part1_example5" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="advent_of_code" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2024/06_guard_gallivant" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_aoc202406.test_part1_example5&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -184,21 +167,36 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
+    <configuration name="Python tests for test_aoc202406.test_part2_example1" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="advent_of_code" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2024/06_guard_gallivant" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_aoc202406.test_part2_example1&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Python.aoc202406" />
       <item itemvalue="Python tests.Python tests for test_aoc202304.test_part1_example1" />
+      <item itemvalue="Python tests.Python tests for test_aoc202406.test_part1_example1" />
       <item itemvalue="Python tests.Python tests for test_aoc202406.test_part1_example3" />
-      <item itemvalue="Python tests.Python tests for test_aoc202406.test_part1_example4" />
-      <item itemvalue="Python tests.Python tests for test_aoc202406.test_part1_example5" />
+      <item itemvalue="Python tests.Python tests for test_aoc202406.test_part2_example1" />
       <item itemvalue="Python tests.Python tests for test_aoc202406.test_part1_example6" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.aoc202406" />
-        <item itemvalue="Python tests.Python tests for test_aoc202406.test_part1_example6" />
-        <item itemvalue="Python tests.Python tests for test_aoc202406.test_part1_example5" />
-        <item itemvalue="Python tests.Python tests for test_aoc202406.test_part1_example4" />
+        <item itemvalue="Python tests.Python tests for test_aoc202406.test_part2_example1" />
         <item itemvalue="Python tests.Python tests for test_aoc202406.test_part1_example3" />
+        <item itemvalue="Python tests.Python tests for test_aoc202406.test_part1_example1" />
+        <item itemvalue="Python tests.Python tests for test_aoc202406.test_part1_example6" />
       </list>
     </recent_temporary>
   </component>
@@ -594,7 +592,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733543338336</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="Day 6, part 1. Works.&#10;&#10;Wasted too much time because I didn't fully read the rules.">
+      <option name="closed" value="true" />
+      <created>1733580135655</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1733580135655</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -610,7 +616,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Fixed a few bugs but still not passing the test." />
     <MESSAGE value="Still not getting the correct answer yet every test case I write passes...." />
     <MESSAGE value="Ugh. My &quot;magic&quot; nubmers were messed up. Switched to constants per hand and everything works. There is a lesson there kids." />
     <MESSAGE value="Stop tracking input files." />
@@ -635,7 +640,8 @@
     <MESSAGE value="Day 5, Part 1 done." />
     <MESSAGE value="Day 5, Part 2 done." />
     <MESSAGE value="Day 6, part 1.&#10;  - Tests pass&#10;  - submit failed with a 5144 too low." />
-    <option name="LAST_COMMIT_MESSAGE" value="Day 6, part 1.&#10;  - Tests pass&#10;  - submit failed with a 5144 too low." />
+    <MESSAGE value="Day 6, part 1. Works.&#10;&#10;Wasted too much time because I didn't fully read the rules." />
+    <option name="LAST_COMMIT_MESSAGE" value="Day 6, part 1. Works.&#10;&#10;Wasted too much time because I didn't fully read the rules." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
