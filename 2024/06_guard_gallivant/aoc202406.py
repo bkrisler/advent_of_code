@@ -1,26 +1,41 @@
 """AoC 6, 2024: guard_gallivant."""
-
-# Standard library imports
+import collections
+import copy
 import pathlib
 import sys
 import typing
 from collections import defaultdict
 from enum import Enum
 import re
+import multiprocessing
+from multiprocessing import Queue
 
 
 class Direction(Enum):
-    UP = ('^', lambda p: Point(p.row - 1, p.col))
-    DOWN = ('v', lambda p: Point(p.row + 1, p.col))
-    RIGHT = ('>', lambda p: Point(p.row, p.col + 1))
-    LEFT = ('<', lambda p: Point(p.row, p.col - 1))
+    # UP = ('^', lambda p: Point(p.row - 1, p.col))
+    # DOWN = ('v', lambda p: Point(p.row + 1, p.col))
+    # RIGHT = ('>', lambda p: Point(p.row, p.col + 1))
+    # LEFT = ('<', lambda p: Point(p.row, p.col - 1))
 
-    def __init__(self, key, f):
+    UP = '^'
+    DOWN = 'v'
+    RIGHT = '>'
+    LEFT = '<'
+
+    def __init__(self, key):
         self.key = key
-        self.f = f
+        #self.f = f
 
     def next(self, pt):
-        return self.f(pt)
+        if self.key == '^':
+            return Point(pt.row - 1, pt.col)
+        elif self.key == 'v':
+            return Point(pt.row + 1, pt.col)
+        elif self.key == '>':
+            return Point(pt.row, pt.col + 1)
+        elif self.key == '<':
+            return Point(pt.row, pt.col - 1)
+
 
     def __str__(self):
         return f'{self.key}'
@@ -49,8 +64,14 @@ class Point(object):
     def __str__(self):
         return f'Point(row={self._row}, col={self._col})'
 
+    def __repr__(self):
+        return f'Point(row={self._row}, col={self._col})'
+
     def __eq__(self, other):
         return self.row == other.row and self.col == other.col
+
+    def __hash__(self):
+        return hash((self._row, self._col))
 
 
 class Visited(object):
@@ -61,14 +82,22 @@ class Visited(object):
     def __str__(self):
         return f'Visited(pos={self.pos}, dir={self.direction.key})'
 
+    def __repr__(self):
+        return f'({self.pos}, {self.direction.key})'
+
+    def __eq__(self, other):
+        return self.pos == other.pos and self.direction.key == other.direction.key
+
+    def __hash__(self):
+        return hash((self.pos, self.direction.key))
+
 class Guard(object):
     def __init__(self, direction: Direction, pos: Point):
         self.direction = direction
         self.pos = pos
-        self.goal = None
         self.done = False
+        self.looping = False
         self.history = []
-        self.safe_blocks = []
 
     @property
     def row(self):
@@ -78,79 +107,31 @@ class Guard(object):
     def col(self):
         return self.pos.col
 
-    def move(self, data: typing.Dict, loop_check: bool=False):
+    def move(self, data: typing.Dict, check: bool=False):
         grid_size = data.get('size')[0]
         new_pos = self.direction.next(self.pos)
-        if new_pos.row >= 0 and new_pos.col >= 0 and new_pos.row < grid_size[0] and new_pos.row < grid_size[1]:
+        if check:
+            self.looping = self.check_loop()
+            if self.looping:
+                return
+
+        if 0 <= new_pos.row < grid_size[0] and 0 <= new_pos.col < grid_size[1]:
             if new_pos in data.get('#'):
                 self.turn()
             else:
                 self.history.append(Visited(self.pos, self.direction))
                 self.pos = new_pos
-                if loop_check:
-                    self.check_loop(data.get('#'))
-
         else:
             self.history.append(Visited(self.pos, self.direction))
             self.done = True
 
-    def check_loop(self, blockers):
-        if self.direction == Direction.UP:
-            row_history = [v for v in self.history if v.pos.row == self.row
-                           and (v.direction == Direction.RIGHT or v.direction == Direction.LEFT) ]
-            if len(row_history) > 0:
-                one_right = Point(self.row, self.col + 1)
-                if one_right in [v.pos for v in row_history]:
-                    self.safe_blocks.append(Point(self.row - 1, self.col))
-                else:
-                    row_blocks = [b for b in blockers if b.row == self.row]
-                    blocker = [b for b in row_blocks if b.row < self.row]
-                    if len(blocker) > 0:
-                        visited_cols = [x.pos.col for x in row_history]
-                        if self.col > max(visited_cols):
-                            self.safe_blocks.append(Point(self.row - 1, self.col))
-        elif self.direction == Direction.RIGHT:
-            col_history = [v for v in self.history if v.pos.col == self.col
-                           and (v.direction == Direction.UP or v.direction == Direction.DOWN)]
-            if len(col_history) > 0:
-                one_down = Point(self.row + 1, self.col)
-                if one_down in [v.pos for v in col_history]:
-                    self.safe_blocks.append(Point(self.row, self.col + 1))
-                else:
-                    col_blocks = [b for b in blockers if b.col == self.col]
-                    blocker = [b for b in col_blocks if b.row > self.row]
-                    if len(blocker) > 0:
-                        visited_rows = [x.pos.row for x in col_history]
-                        if self.row < min(visited_rows):
-                            self.safe_blocks.append(Point(self.row, self.col + 1))
-        elif self.direction == Direction.DOWN:
-            row_history = [v for v in self.history if v.pos.row == self.row
-                           and (v.direction == Direction.RIGHT or v.direction == Direction.LEFT) ]
-            if len(row_history) > 0:
-                one_left = Point(self.row, self.col - 1)
-                if one_left in [v.pos for v in row_history]:
-                    self.safe_blocks.append(Point(self.row + 1, self.col))
-                else:
-                    row_blocks = [b for b in blockers if b.row == self.row]
-                    blocker = [b for b in row_blocks if b.row < self.row]
-                    if len(blocker) > 0:
-                        visited_cols = [x.pos.col for x in row_history]
-                        if self.col < min(visited_cols):
-                            self.safe_blocks.append(Point(self.row + 1, self.col))
-        elif self.direction == Direction.LEFT:
-            col_history = [v for v in self.history if v.pos.col == self.col
-                           and (v.direction == Direction.UP or v.direction == Direction.DOWN)]
-            if len(col_history) > 0:
-                one_up = Point(self.row - 1, self.col)
-                if one_up in [v.pos for v in col_history]:
-                    self.safe_blocks.append(Point(self.row, self.col - 1))
-                else:
-                    col_blocks = [b for b in blockers if b.col == self.col]
-                    blocker = [b for b in col_blocks if b.row < self.row]
-                    if len(blocker) > 0:
-                        visited_rows = [x.pos.row for x in col_history]
-                        if self.row > max(visited_rows):
-                            self.safe_blocks.append(Point(self.row, self.col + 1))
+    def check_loop(self):
+        counts = collections.Counter(self.history)
+        if len(counts) > 4 and counts.most_common()[0][1] > 2:
+            return True
+
+        return False
+
 
     def turn(self):
         if self.direction == Direction.UP:
@@ -189,57 +170,11 @@ def parse_data(puzzle_input):
     return blocks
 
 
-def path_right(history: typing.List, point: Point) -> bool:
-    target_row = point.row
-    for visited in history:
-        for pos in visited:
-            if pos.row == target_row and pos.col > point.col:
-                return True
-
-    return False
-
-def path_left(history: typing.List, point: Point) -> bool:
-    target_row = point.row
-    for visited in history:
-        for pos in visited:
-            if pos.row == target_row and pos.col < point.col:
-                return True
-
-    return False
-
-def path_up(history: typing.List, point: Point) -> bool:
-    target_col = point.col
-    for visited in history:
-        for pos in visited:
-            if pos.col == target_col and pos.col < point.col:
-                return True
-
-    return False
-
-def path_down(history: typing.List, point: Point) -> bool:
-    target_col = point.col
-    for visited in history:
-        for pos in visited:
-            if pos.col == target_col and pos.col > point.col:
-                return True
-
-    return False
-
-def check_history(guard: Guard, visited: typing.List, direction: Direction):
-    for point in visited:
-        print(f"Point: {point} and Guard: {guard.pos}")
-        if guard.pos.row == point.row and guard.pos.col == point.col:
-            print("HERE")
-    print("Not Here")
-
-    return None
-
-
 def part1(data):
     """Solve part 1."""
     guard = data['guard'][0]
     while not guard.done:
-        guard.move(data, loop_check=True)
+        guard.move(data)
 
     unique_visited = []
     for visited in guard.history:
@@ -251,19 +186,39 @@ def part1(data):
 
 def part2(data):
     """Solve part 2."""
-    print()
+    count = 0
+    params = []
 
-    guard = data['guard'][0]
-    while not guard.done:
-        guard.move(data, loop_check=True)
+    for r_idx in range(data.get('size')[0][0]):
+        for c_idx in range(data.get('size')[0][1]):
+            guard = Guard(data['guard'][0].direction, data['guard'][0].pos)
+            params.append((data, guard, Point(r_idx, c_idx)))
 
-    return len(guard.safe_blocks)
+    with multiprocessing.Pool() as pool:
+        for result in pool.starmap(process_column, params):
+            count += result
+    pool.close()
+
+    print(f"Count: {count}")
+    return count
+
+
+def process_column(data, guard, point):
+    if point not in data.get('#'):
+        dc = copy.deepcopy(data)
+        dc['#'].append(point)
+        while not guard.done:
+            guard.move(dc, True)
+            if guard.looping:
+                print(f"Valid block point: {dc['#'][-1]}")
+                return 1
+    return 0
 
 
 def solve(puzzle_input):
     """Solve the puzzle for the given input."""
     data = parse_data(puzzle_input)
-    yield part1(data)
+    #yield part1(data)
     yield part2(data)
 
 

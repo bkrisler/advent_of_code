@@ -5,4 +5,3 @@
 See https://adventofcode.com/2024/day/6
 
 
-Part 2, 833 is too low.
