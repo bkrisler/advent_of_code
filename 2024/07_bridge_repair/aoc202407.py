@@ -31,24 +31,24 @@ def part1(data):
     print()
     result = 0
     for row in data:
-        result += process_entry(result, row)
+        result += process_entry(row, func=compute_without_concat)
 
     return result
 
 
-def process_entry(result, row):
+def process_entry(row, ops='*+', func=None):
     goal = row[0]
     values = row[1]
-    operators = list(itertools.product('*+', repeat=len(values) - 1))
+    operators = list(itertools.product(ops, repeat=len(values) - 1))
     for ooo in operators:
-        result = compute(ooo, values)
+        result = func(ooo, values)
         if result == goal:
             return result
 
     return 0
 
 
-def compute(ooo, values):
+def compute_without_concat(ooo, values):
     result = values[0]
     for idx, v in enumerate(values[1:]):
         result = eval(f'{result} {ooo[idx]} {v}')
@@ -56,8 +56,26 @@ def compute(ooo, values):
     return result
 
 
+def compute_with_concat(ooo, values):
+    result = values[0]
+    for idx, v in enumerate(values[1:]):
+        expression = f'{result} {ooo[idx]} {v}'
+        if '|' in expression:
+            result = int(f'{result}{v}')
+        else:
+            result = eval(expression)
+
+    return result
+
+
 def part2(data):
     """Solve part 2."""
+    print()
+    result = 0
+    for row in data:
+        result += process_entry(row, '*+|', func=compute_with_concat)
+
+    return result
 
 
 def solve(puzzle_input):
