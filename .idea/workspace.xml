@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="59f98ace-f199-4728-9ae5-c72622f91a4f" name="Changes" comment="Day 8, Part 1 working">
+    <list default="true" id="59f98ace-f199-4728-9ae5-c72622f91a4f" name="Changes" comment="Day 9 skeleton">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2024/08_resonant_collinearity/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/2024/08_resonant_collinearity/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2024/08_resonant_collinearity/aoc202408.py" beforeDir="false" afterPath="$PROJECT_DIR$/2024/08_resonant_collinearity/aoc202408.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2024/08_resonant_collinearity/example2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/2024/08_resonant_collinearity/example2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2024/08_resonant_collinearity/test_aoc202408.py" beforeDir="false" afterPath="$PROJECT_DIR$/2024/08_resonant_collinearity/test_aoc202408.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2024/09_disk_fragmenter/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/2024/09_disk_fragmenter/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2024/09_disk_fragmenter/aoc202409.py" beforeDir="false" afterPath="$PROJECT_DIR$/2024/09_disk_fragmenter/aoc202409.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2024/09_disk_fragmenter/test_aoc202409.py" beforeDir="false" afterPath="$PROJECT_DIR$/2024/09_disk_fragmenter/test_aoc202409.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,6 +68,8 @@
     "Python tests.Python tests for test_aoc202408.test_parse_example1.executor": "Run",
     "Python tests.Python tests for test_aoc202408.test_part1_example1.executor": "Run",
     "Python tests.Python tests for test_aoc202408.test_part2_example2.executor": "Run",
+    "Python tests.Python tests for test_aoc202409.test_parse_example1.executor": "Debug",
+    "Python tests.Python tests for test_aoc202409.test_part1_example1.executor": "Run",
     "Python tests.Python tests in test_aoc202401.py.executor": "Run",
     "Python tests.Python tests in test_aoc202406.py.executor": "Run",
     "Python tests.Python tests in test_aoc202408.py.executor": "Run",
@@ -81,12 +82,14 @@
     "Python.aoc202406.executor": "Run",
     "Python.aoc202407.executor": "Run",
     "Python.aoc202408.executor": "Run",
+    "Python.aoc202409.executor": "Run",
     "Python.scratch_2.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/briankrisler/Documents/30-39 Coding/advent_of_code"
+    "last_opened_file_path": "/Users/briankrisler/Documents/30-39 Coding/advent_of_code",
+    "settings.editor.selected.configurable": "editing.templates"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -94,7 +97,7 @@
       <recent name="$USER_HOME$/Desktop" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.aoc202408">
+  <component name="RunManager" selected="Python.aoc202409">
     <configuration name="aoc202408" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="advent_of_code" />
       <option name="ENV_FILES" value="" />
@@ -109,6 +112,28 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2024/08_resonant_collinearity/aoc202408.py" />
+      <option name="PARAMETERS" value="input.txt" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="aoc202409" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="advent_of_code" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2024/09_disk_fragmenter" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2024/09_disk_fragmenter/aoc202409.py" />
       <option name="PARAMETERS" value="input.txt" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -132,36 +157,6 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_aoc202408.test_parse_example1" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="advent_of_code" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2024/08_resonant_collinearity" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_aoc202408.test_parse_example1&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Python tests for test_aoc202408.test_part1_example1" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="advent_of_code" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2024/08_resonant_collinearity" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_aoc202408.test_part1_example1&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
     <configuration name="Python tests for test_aoc202408.test_part2_example2" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="advent_of_code" />
       <option name="ENV_FILES" value="" />
@@ -177,36 +172,51 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests in test_aoc202408.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for test_aoc202409.test_parse_example1" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="advent_of_code" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2024/08_resonant_collinearity" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2024/09_disk_fragmenter" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/2024/08_resonant_collinearity/test_aoc202408.py&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <option name="_new_target" value="&quot;test_aoc202409.test_parse_example1&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_aoc202409.test_part1_example1" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="advent_of_code" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2024/09_disk_fragmenter" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_aoc202409.test_part1_example1&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.aoc202409" />
       <item itemvalue="Python.aoc202408" />
       <item itemvalue="Python tests.Python tests for test_aoc202304.test_part1_example1" />
       <item itemvalue="Python tests.Python tests for test_aoc202408.test_part2_example2" />
-      <item itemvalue="Python tests.Python tests in test_aoc202408.py" />
-      <item itemvalue="Python tests.Python tests for test_aoc202408.test_parse_example1" />
-      <item itemvalue="Python tests.Python tests for test_aoc202408.test_part1_example1" />
+      <item itemvalue="Python tests.Python tests for test_aoc202409.test_parse_example1" />
+      <item itemvalue="Python tests.Python tests for test_aoc202409.test_part1_example1" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.aoc202409" />
+        <item itemvalue="Python tests.Python tests for test_aoc202409.test_part1_example1" />
+        <item itemvalue="Python tests.Python tests for test_aoc202409.test_parse_example1" />
         <item itemvalue="Python.aoc202408" />
         <item itemvalue="Python tests.Python tests for test_aoc202408.test_part2_example2" />
-        <item itemvalue="Python tests.Python tests in test_aoc202408.py" />
-        <item itemvalue="Python tests.Python tests for test_aoc202408.test_part1_example1" />
-        <item itemvalue="Python tests.Python tests for test_aoc202408.test_parse_example1" />
       </list>
     </recent_temporary>
   </component>
@@ -225,22 +235,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1701460783172</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Finished Day 3.">
-      <option name="closed" value="true" />
-      <created>1701746201901</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1701746201901</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Day 4 setup">
-      <option name="closed" value="true" />
-      <created>1701746534014</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1701746534014</updated>
     </task>
     <task id="LOCAL-00008" summary="Day 4 part one submitted.">
       <option name="closed" value="true" />
@@ -618,7 +612,23 @@
       <option name="project" value="LOCAL" />
       <updated>1734060854974</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="Day 8, Part 2 working">
+      <option name="closed" value="true" />
+      <created>1734097495300</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1734097495300</updated>
+    </task>
+    <task id="LOCAL-00056" summary="Day 9 skeleton">
+      <option name="closed" value="true" />
+      <created>1734097557003</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1734097557003</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -634,8 +644,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Day 9, Part 2 done." />
-    <MESSAGE value="Day 10, Part 1 done." />
     <MESSAGE value="Day 10, Part 2. Had to look up a hint." />
     <MESSAGE value="Day 11, Part 1. Done." />
     <MESSAGE value="Day 11, Part 2. Done." />
@@ -659,7 +667,9 @@
     <MESSAGE value="Day 7, part 2. &#10;&#10;Done." />
     <MESSAGE value="Day 8 skeleton" />
     <MESSAGE value="Day 8, Part 1 working" />
-    <option name="LAST_COMMIT_MESSAGE" value="Day 8, Part 1 working" />
+    <MESSAGE value="Day 8, Part 2 working" />
+    <MESSAGE value="Day 9 skeleton" />
+    <option name="LAST_COMMIT_MESSAGE" value="Day 9 skeleton" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
