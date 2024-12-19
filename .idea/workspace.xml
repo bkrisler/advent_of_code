@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="59f98ace-f199-4728-9ae5-c72622f91a4f" name="Changes" comment="Day 9, part 1 works">
+    <list default="true" id="59f98ace-f199-4728-9ae5-c72622f91a4f" name="Changes" comment="Day 9, part 2 will all my bad attempts.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2024/09_disk_fragmenter/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/2024/09_disk_fragmenter/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/2024/09_disk_fragmenter/aoc202409.py" beforeDir="false" afterPath="$PROJECT_DIR$/2024/09_disk_fragmenter/aoc202409.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2024/09_disk_fragmenter/test_aoc202409.py" beforeDir="false" afterPath="$PROJECT_DIR$/2024/09_disk_fragmenter/test_aoc202409.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +82,7 @@
     "Python.aoc202406.executor": "Run",
     "Python.aoc202407.executor": "Run",
     "Python.aoc202408.executor": "Run",
-    "Python.aoc202409.executor": "Debug",
+    "Python.aoc202409.executor": "Run",
     "Python.scratch_2.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -230,14 +228,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1701460783172</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Day 4 completed.">
-      <option name="closed" value="true" />
-      <created>1701751898266</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1701751898266</updated>
     </task>
     <task id="LOCAL-00010" summary="Day 5 startup">
       <option name="closed" value="true" />
@@ -623,7 +613,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734149519591</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="Day 9, part 2 will all my bad attempts.">
+      <option name="closed" value="true" />
+      <created>1734621566918</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1734621566918</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -639,7 +637,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Day 11, Part 1. Done." />
     <MESSAGE value="Day 11, Part 2. Done." />
     <MESSAGE value="Day 12, Part 1. Accidentially saw a solution that I could not unsee." />
     <MESSAGE value="Day 1, Part 1. Works!" />
@@ -664,7 +661,8 @@
     <MESSAGE value="Day 8, Part 2 working" />
     <MESSAGE value="Day 9 skeleton" />
     <MESSAGE value="Day 9, part 1 works" />
-    <option name="LAST_COMMIT_MESSAGE" value="Day 9, part 1 works" />
+    <MESSAGE value="Day 9, part 2 will all my bad attempts." />
+    <option name="LAST_COMMIT_MESSAGE" value="Day 9, part 2 will all my bad attempts." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -698,11 +696,6 @@
           <url>file://$PROJECT_DIR$/2024/05_print_queue/aoc202405.py</url>
           <line>45</line>
           <option name="timeStamp" value="420" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/2024/09_disk_fragmenter/aoc202409.py</url>
-          <line>163</line>
-          <option name="timeStamp" value="432" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

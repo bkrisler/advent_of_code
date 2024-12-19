@@ -69,47 +69,6 @@ class DiskMap(object):
         return new_map
 
 
-    def move(self, dmap, pos):
-        added = 0
-        swap_spot = -1
-        for idx, x in enumerate(dmap):
-            if idx < pos and x[0] == '.' and dmap[pos][1] <= x[1]:
-                swap_spot = idx
-                break
-
-        if swap_spot == -1:
-            return dmap, added
-
-        # Swap the spots
-        source = dmap[pos]
-        target = dmap[swap_spot]
-        diff = target[1] - source[1]
-
-        # If there is remaining free space, don't loose it
-        if diff > 0:
-            dmap[swap_spot] = source
-            dmap[pos] = ('.', source[1])
-            dmap.insert(swap_spot+1, ('.', diff))
-        else:
-            dmap[swap_spot] = source
-            dmap[pos] = target
-
-        # Clean up free space
-        result = []
-        acc = 0
-        for idx, v in enumerate(dmap):
-            if v[0] != '.':
-                if acc > 0:
-                    result.append(('.', acc))
-                    acc = 0
-                result.append(v)
-            else:
-                acc += v[1]
-        if acc > 0:
-            result.append(('.', acc))
-
-
-        return result, added
 
     def dump(self, row, map_):
         result = ''
@@ -164,35 +123,6 @@ class DiskMap(object):
         return checksum
 
 
-    def full_defrag(self):
-        print()
-        id_idx_map = []
-        file_id = 0
-        file_map = []
-        for idx, v in enumerate(self.raw):
-            if idx % 2 == 0:
-                id_idx_map.append((file_id, int(v)))
-                file_map.append((file_id, int(v)))
-                file_id += 1
-            else:
-                if int(v) > 0:
-                    id_idx_map.append(('.', int(v)))
-
-        # row = 0
-        # self.dump(row, id_idx_map)
-        # row += 1
-
-        new_map = id_idx_map.copy()
-
-        for index, value in enumerate(reversed(file_map)):
-            map_index = new_map.index(value)
-            new_map, added = self.move(new_map, map_index)
-            # self.dump(row, new_map)
-            # row += 1
-
-        return new_map
-
-
 def checksum(entry):
     result = 0
     for idx, v in enumerate(entry):
@@ -221,8 +151,6 @@ def part1(data):
 
 def part2(data):
     """Solve part 2."""
-    #result = data.full_defrag()
-    #return checksum2(result)
     return data.reallocate()
 
 
